@@ -12,10 +12,12 @@ import UserPage from './components/pages/UserPage';
 import HomePage from './components/pages/HomePage';
 import RankPage from './components/pages/RankPage';
 // import ProgressCircle from './components/atoms/ProgressCircle';
+import Header from './components/organisms/Header';
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/user" element={<UserPage />} />
