@@ -15,25 +15,18 @@ function App() {
     <BrowserRouter>
       <StyledWrap>
         <Header />
-        <StyledMain>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="*" element={<NotPound />} />
-            <Route path="/user" element={<UserPage />} />
-            <Route path="/rank" element={<RankPage />} />
-            <Route path="/redux" element={<ReduxTest />} />
-            <Route path="/redux1" element={<ReduxRanking />} />
-          </Routes>
-        </StyledMain>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<NotPound />} />
+          <Route path="/user" element={<UserPage />} />
+          <Route path="/rank" element={<RankPage />} />
+          <Route path="/redux" element={<ReduxTest />} />
+          <Route path="/redux1" element={<ReduxRanking />} />
+        </Routes>
       </StyledWrap>
     </BrowserRouter>
   );
 }
-
-const StyledMain = styled.main`
-  max-width: 1200px;
-  margin: 0 auto;
-`;
 
 const StyledWrap = styled.div`
   min-height: 100vh;
