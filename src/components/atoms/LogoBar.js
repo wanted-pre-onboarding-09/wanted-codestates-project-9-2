@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
 const LogoContainer = styled.div`
+  margin: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 100%;
   height: 50%;
   background-color: #ffffff;
 `;
