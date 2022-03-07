@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Search from './Search';
 
 const NavCantainer = styled.div`
   margin: 0 auto;
@@ -15,6 +17,9 @@ const TabBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  a {
+    text-decoration: none;
+  }
 `;
 
 const Tab = styled.div`
@@ -26,20 +31,28 @@ const Tab = styled.div`
   height: 4rem;
   color: #ffffff;
   opacity: 0.5;
-  transition: 0.5s;
 
   :hover {
     color: #ffffff;
     cursor: pointer;
     opacity: 1;
-    ::before {
+    ::after {
       content: '';
       position: absolute;
       bottom: 0px;
       left: 0px;
       width: 100%;
-      border-bottom: 4px solid #fff;
+      border-bottom: 4px solid #ffffff;
     }
+  }
+  ::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 0%;
+    border-bottom: 4px solid #ffffff;
+    transition: 0.3s;
   }
 `;
 
@@ -47,14 +60,16 @@ function NavBar() {
   return (
     <NavCantainer>
       <TabBox>
-        <Tab>홈</Tab>
-        <Tab>랭킹</Tab>
+        <Link to="/">
+          <Tab>홈</Tab>
+        </Link>
+        <Link to="/rank">
+          <Tab>랭킹</Tab>
+        </Link>
         <Tab>카트</Tab>
         <Tab>트랙</Tab>
       </TabBox>
-      <div>
-        <input type="text" />
-      </div>
+      <Search />
     </NavCantainer>
   );
 }
