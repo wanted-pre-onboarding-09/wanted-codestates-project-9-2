@@ -9,16 +9,14 @@ import Bronz from '../../assets/icon_bronzemedal.png';
 const TopRankWrap = styled.div`
   margin-top: 3rem;
   height: 305px;
-  /* background: #d8d8d8; */
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const TopRankContainer = styled.div`
-  width: 900px;
+  width: 1000px;
   height: 305px;
-  /* background: #6e6e6e; */
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -34,7 +32,7 @@ const TopRankElement = styled.div`
   }
 `;
 const UpperTopRankWrap = styled.div`
-  width: 246px;
+  width: 306px;
   height: 133px;
   background: #fff;
   border-top-left-radius: 10px;
@@ -43,33 +41,59 @@ const UpperTopRankWrap = styled.div`
   background-size: cover;
   background-position: 50%;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+
+  @media screen and (max-width: 1630px) {
+    width: 246px;
+  }
+
+  > img {
+    width: 60%;
+    position: absolute;
+    top: -1rem;
+    right: -2rem;
+
+    @media screen and (max-width: 1630px) {
+      display: none;
+    }
+  }
 `;
 
 const LowerTopRankWrap = styled.div`
   position: relative;
   margin-top: 1px;
-  width: 246px;
+  width: 306px;
   height: 133px;
   display: flex;
   flex-direction: row;
+
+  @media screen and (max-width: 1630px) {
+    width: 246px;
+  }
 `;
 
 const LowerLeftRankWrap = styled.div`
-  width: 123px;
+  width: 153px;
   height: 112px;
   background: #fff;
   border-bottom-left-radius: 10px;
+
+  @media screen and (max-width: 1630px) {
+    width: 123px;
+  }
 `;
 
 const LowerLeftRankContainer = styled.div`
-  width: 123px;
+  width: 153px;
   height: 112px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 1630px) {
+    width: 123px;
+  }
 
   > .text {
     font-size: 12px;
@@ -77,10 +101,14 @@ const LowerLeftRankContainer = styled.div`
 `;
 
 const LowerRightRankWrap = styled.div`
-  width: 123px;
+  width: 153px;
   height: 112px;
   background: #fff;
   border-bottom-right-radius: 10px;
+
+  @media screen and (max-width: 1630px) {
+    width: 123px;
+  }
 `;
 
 const SeparateLine = styled.div`
@@ -95,11 +123,11 @@ const SeparateLine = styled.div`
 `;
 const TopRankNameWrap = styled.div`
   width: 206px;
-  height: 80%;
-  /* background: #f5a9f2; */
+  height: 60%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
 
   > .name {
     width: 100%;
@@ -135,7 +163,6 @@ const TopRankNameWrap = styled.div`
 
     > .text1 {
       font-size: 14px;
-      /* font-weight: bold; */
     }
 
     > .text2 {
@@ -148,7 +175,6 @@ const TopRankNameWrap = styled.div`
       color: #9bd728;
       margin-left: 0.3rem;
       font-size: 0.8rem;
-      /* border: 1px solid black; */
     }
 
     > .plusGreen {
@@ -161,6 +187,36 @@ const TopRankNameWrap = styled.div`
 `;
 
 function TopRank() {
+  /* useSelector를 통해 수신된 데이터 담기
+  Progress chart 2개의 파라미터를 인자로 받는다. 
+  
+   <ProgressCircle color="#07f" percent={RankingData[0].win} />
+
+  변수 1 color: 도너 차트 외곽선 색깔
+  변수 2 percent: 도너 차트 
+  */
+
+  const RankingData = [
+    {
+      character:
+        'https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/201c61527a04d85cd2de0dad75ab0878ee4125129e57aabe47b3d3ac06df8d67.png',
+      win: 80,
+      retire: 12,
+    },
+    {
+      character:
+        'https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/041195c896c373b7764e7786fab3006d897fa7326a90fce1d5299e8b78d9b672.png',
+      win: 45,
+      retire: 2,
+    },
+    {
+      character:
+        'https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/041195c896c373b7764e7786fab3006d897fa7326a90fce1d5299e8b78d9b672.png',
+      win: 78,
+      retire: 33,
+    },
+  ];
+
   return (
     <TopRankWrap>
       <TopRankContainer>
@@ -181,19 +237,23 @@ function TopRank() {
                 <span className="plusGreen">221</span>
               </div>
             </TopRankNameWrap>
+            <img src={RankingData[0].character} alt="없음" />
           </UpperTopRankWrap>
           <LowerTopRankWrap>
             <LowerLeftRankWrap>
               <LowerLeftRankContainer>
                 <div className="text">승률</div>
-                <ProgressCircle color="#07f" />
+                <ProgressCircle color="#07f" percent={RankingData[0].win} />
               </LowerLeftRankContainer>
             </LowerLeftRankWrap>
             <SeparateLine />
             <LowerRightRankWrap>
               <LowerLeftRankContainer>
                 <div className="text">리타이어율</div>
-                <ProgressCircle color="#f62459" />
+                <ProgressCircle
+                  color="#f62459"
+                  percent={RankingData[0].retire}
+                />
               </LowerLeftRankContainer>
             </LowerRightRankWrap>
           </LowerTopRankWrap>
@@ -216,19 +276,23 @@ function TopRank() {
                 <span className="plusGreen">158</span>
               </div>
             </TopRankNameWrap>
+            <img src={RankingData[1].character} alt="없음" />
           </UpperTopRankWrap>
           <LowerTopRankWrap>
             <LowerLeftRankWrap>
               <LowerLeftRankContainer>
                 <div className="text">승률</div>
-                <ProgressCircle color="#07f" />
+                <ProgressCircle color="#07f" percent={RankingData[1].win} />
               </LowerLeftRankContainer>
             </LowerLeftRankWrap>
             <SeparateLine />
             <LowerRightRankWrap>
               <LowerLeftRankContainer>
                 <div className="text">리타이어율</div>
-                <ProgressCircle color="#f62459" />
+                <ProgressCircle
+                  color="#f62459"
+                  percent={RankingData[1].retire}
+                />
               </LowerLeftRankContainer>
             </LowerRightRankWrap>
           </LowerTopRankWrap>
@@ -251,19 +315,23 @@ function TopRank() {
                 <span className="plusGreen">313</span>
               </div>
             </TopRankNameWrap>
+            <img src={RankingData[2].character} alt="없음" />
           </UpperTopRankWrap>
           <LowerTopRankWrap>
             <LowerLeftRankWrap>
               <LowerLeftRankContainer>
                 <div className="text">승률</div>
-                <ProgressCircle color="#07f" />
+                <ProgressCircle color="#07f" percent={RankingData[2].win} />
               </LowerLeftRankContainer>
             </LowerLeftRankWrap>
             <SeparateLine />
             <LowerRightRankWrap>
               <LowerLeftRankContainer>
                 <div className="text">리타이어율</div>
-                <ProgressCircle color="#f62459" />
+                <ProgressCircle
+                  color="#f62459"
+                  percent={RankingData[2].retire}
+                />
               </LowerLeftRankContainer>
             </LowerRightRankWrap>
           </LowerTopRankWrap>

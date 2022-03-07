@@ -1,8 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import Banner from '../molecules/Banner';
 import Profile from '../molecules/Profile';
-import styled from 'styled-components';
-
 import RecordSideTab from '../molecules/RecordSideTab';
 import UserTabBar from '../molecules/UserTabBar';
 import Comment from '../atoms/Comment';
