@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import RankGuideButton from '../atoms/RankGuideButton';
 import SoloOrTeamTabBar from '../molecules/SoloOrTeamTabBar';
 import ThreeTabBar from '../molecules/ThreeTabBar';
+import TopRank from '../molecules/TopRank';
 
 const RankInfoContainer = () => (
   <InfoContainer>
@@ -24,6 +25,7 @@ const RankInfoContainer = () => (
       <LineSpan>|</LineSpan>
       <ThreeTabBar />
     </Tabs>
+    <TopRank />
   </InfoContainer>
 );
 
