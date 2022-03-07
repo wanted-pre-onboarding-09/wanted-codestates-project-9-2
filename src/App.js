@@ -1,27 +1,41 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
 import UserPage from './components/pages/UserPage';
 import HomePage from './components/pages/HomePage';
 import RankPage from './components/pages/RankPage';
 import Header from './components/organisms/Header';
 import ReduxTest from './ReduxTest';
 import ReduxRanking from './ReduxRanking';
+import NotPound from './components/pages/NotPound';
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/user" element={<UserPage />} />
-        <Route path="/rank" element={<RankPage />} />
-        <Route path="/redux" element={<ReduxTest />} />
-        <Route path="/redux1" element={<ReduxRanking />} />
-      </Routes>
+      <StyledWrap>
+        <Header />
+        <StyledMain>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<NotPound />} />
+            <Route path="/user" element={<UserPage />} />
+            <Route path="/rank" element={<RankPage />} />
+            <Route path="/redux" element={<ReduxTest />} />
+            <Route path="/redux1" element={<ReduxRanking />} />
+          </Routes>
+        </StyledMain>
+      </StyledWrap>
     </BrowserRouter>
   );
 }
 
+const StyledMain = styled.main`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const StyledWrap = styled.div`
+  min-height: 100vh;
+`;
 export default App;
