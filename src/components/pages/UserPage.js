@@ -1,28 +1,37 @@
 import React from 'react';
-import Banner from '../molecules/Banner';
-import Profile from '../molecules/Profile';
 import styled from 'styled-components';
 
-import RecordSideTab from '../molecules/RecordSideTab';
-import UserTabBar from '../molecules/UserTabBar';
+import Banner from '../molecules/Banner';
+import Profile from '../molecules/Profile';
 import Comment from '../atoms/Comment';
+import UserTabBar from '../molecules/UserTabBar';
+import RecordSideTab from '../molecules/RecordSideTab';
+import RecordList from '../molecules/RecordList';
 
 const UserPage = () => {
   return (
-    <div>
+    <Container>
       <Profile />
       <Banner />
       <Comment />
       <UserTabBar />
       <RecordWrapper>
         <RecordSideTab />
+        <RecordList />
       </RecordWrapper>
-    </div>
+    </Container>
   );
 };
 
 export default UserPage;
 
+const Container = styled.div`
+  width: 1000px;
+  margin: 0 auto;
+  padding-top: 50px;
+`;
+
 const RecordWrapper = styled.div`
+  display: flex;
   margin-top: 20px;
 `;

@@ -126,6 +126,7 @@ export default RecordSideTab;
 
 const Container = styled.div`
   width: 330px;
+  margin-right: 10px;
 `;
 
 const TabWrapper = styled.div``;
