@@ -18,28 +18,30 @@ const rankingSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getMatchList.fulfilled, (state, { payload }) => {
-      state.data = [...payload].map((el) => {
-        return {
-          character: el.players[0].character,
-          nickName: el.players[0].characterName,
-          playTime: el.playTime,
-          kart: el.kart,
-          rank:
-            el.players[0].matchRank === '99' ? '8' : el.players[0].matchRank,
-          matchRetired: Math.ceil(
-            (+el.players[0].matchRetired / +el.playTime) * 1000,
-          ),
-          score:
-            el.playTime *
-            (el.players[0].matchRank === '99'
-              ? 1
-              : 9 - +el.players[0].matchRank),
-          victory:
-            Math.ceil((+el.players[0].matchWin / +el.playTime) * 1000) > 100
-              ? 100
-              : Math.ceil((+el.players[0].matchWin / +el.playTime) * 1000),
-        };
-      });
+      state.data = [...payload]
+        .map((el) => {
+          const player = el.players ? el.players[0] : el.teams[0].players[0];
+          return {
+            character: player.character,
+            nickName: player.characterName,
+            playTime: el.playTime,
+            kart: player.kart
+              ? player.kart
+              : 'f7724634e3a539e6f45cbfa30eb90074081fcb2abddeff6f035d06191d784931',
+            rank: player.matchRank === '99' ? '8' : player.matchRank,
+            matchRetired: Math.ceil(
+              (+player.matchRetired / +el.playTime) * 1000,
+            ),
+            score:
+              el.playTime *
+              (player.matchRank === '99' ? 1 : 9 - +player.matchRank),
+            victory:
+              Math.ceil((+player.matchWin / +el.playTime) * 1000) > 100
+                ? 100
+                : Math.ceil((+player.matchWin / +el.playTime) * 1000),
+          };
+        })
+        .sort((a, b) => b.score - a.score);
       state.loading = false;
     });
     builder.addCase(getMatchList.rejected, (state) => {
