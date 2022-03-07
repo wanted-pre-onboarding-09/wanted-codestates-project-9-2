@@ -1,95 +1,85 @@
-/* eslint-disable array-callback-return */
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-// import dummyData from '../../../dummy/dummyData';
 
 const ProgressCircleWrap = styled.div`
-  position: relative;
-  padding: 5%;
-  background: #d8d8d8;
+  margin-top: 0.7rem;
 `;
 
-const ProgressCircleContainer = styled.div`
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-  background: #ffff;
-`;
+const ProgressCircleContainer = styled.div``;
 
 const CircleChart = styled.div`
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
   transition: 0.3s;
-  /*  background: conic-gradient(#07f 0% 80%, #dedede 1% 100%); */ // #f62459 빨간색
 `;
 
 const CircleSubChart = styled.span`
   background: #fff;
-  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140px;
-  height: 140px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   text-align: center;
-  line-height: 80px;
-  font-size: 20px;
+  line-height: 40px;
+  font-size: 16px;
   transform: translate(-50%, -50%); //가운데 위치
+  color: #07f;
+
+  > span {
+    font-weight: 700;
+    font-size: 16px;
+    font-family: Noto Sans KR;
+  }
 `;
 
-function ProgressCircle() {
-  const chart1 = useRef(null);
-  const chart2 = useRef(null);
+function ProgressCircle({ color, percent }) {
+    /* 
+  ProgressCircle 컴포넌트는 부모 컴포넌트로 부터 2개의 파라미터를 인자로 받는다. 
+  
+   <ProgressCircle color="#07f" percent={RankingData[0].win} />
 
-  const chartData = [
-    {
-      className: chart1,
-      percent: 80,
-    },
-    {
-      className: chart2,
-      percent: 40,
-    },
-  ];
-
+  변수 1 color: 도너 차트 외곽선 색깔
+  변수 2 percent: 도너 차트 
+  */
+  
+  const chart1 = useRef(null); // 차트가 그려질 div 영역
   let i = 1;
 
-  const colorFn = (className, i) => {
-    className.current.style.background = `conic-gradient(#07f 0% ${i}%, #dedede 1% 100%)`;
+  const colorFn = (i, color) => {
+    // makeChart의 setInterval 함수에 의해 conic-gradient의 색깔이 1% --> 100%가 채워질때까지 실행된다.
+    chart1.current.style.background = `conic-gradient(${color} 0% ${i}%, #dedede 1% 100%)`;
   };
 
-  const makeChart = (className, percent) => {
-    const chartFn = setInterval(() => {
+  const makeChart = (percent, color) => {
+    const chartFunc = setInterval(() => {
       if (i <= percent) {
-        if (className.current) {
-          colorFn(className, i);
+        if (chart1.current) {
+          colorFn(i, color);
           i += 1;
         } else {
-          return null;
+          return null; // cannot read property 'style' 에러 발생 방지 위한 else로 분기처리
         }
       } else {
-        clearInterval(chartFn);
+        clearInterval(chartFunc);
       }
     }, 10);
   };
 
   useEffect(() => {
-    chartData.map((el) => {
-      makeChart(el.className, el.percent);
-    });
-  }, []);
+    makeChart(percent, color);
+  }, []); // useEffect는 랜더링시에 한번만 실행된다.
 
   return (
     <ProgressCircleWrap>
       <ProgressCircleContainer>
         <CircleChart ref={chart1}>
-          <CircleSubChart>{chartData[0].percent}</CircleSubChart>
-        </CircleChart>
-        <CircleChart ref={chart2}>
-          <CircleSubChart>{chartData[1].percent}</CircleSubChart>
+          <CircleSubChart>
+            <span>{percent}%</span>
+          </CircleSubChart>
         </CircleChart>
       </ProgressCircleContainer>
     </ProgressCircleWrap>

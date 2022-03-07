@@ -15,7 +15,7 @@ const SoloOrTeamTabBar = ({ isUserPage }) => {
         isUserPage={isUserPage}
         onClick={handleSoloTab}
       >
-        <FontAwesomeIcon icon={faUser} />
+        <Icon icon={faUser} />
         개인전
       </LeftTabButton>
       <RightTabButton
@@ -23,7 +23,7 @@ const SoloOrTeamTabBar = ({ isUserPage }) => {
         isUserPage={isUserPage}
         onClick={handleSoloTab}
       >
-        <FontAwesomeIcon icon={faUsers} />
+        <Icon icon={faUsers} />
         팀전
       </RightTabButton>
     </ButtonTabbar>
@@ -76,4 +76,8 @@ const LeftTabButton = styled(ButtonTab)`
 const RightTabButton = styled(ButtonTab)`
   border-width: 0.7px 0.7px 0.7px 0.7px;
   border-radius: 0 5px 5px 0;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  margin-right: 10px;
 `;
