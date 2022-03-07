@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<NotPound />} />
-          <Route path="/user" element={<UserPage />} />
+          <Route path="/user/:id" element={<UserPage />} />
           <Route path="/rank" element={<RankPage />} />
           <Route path="/redux" element={<ReduxTest />} />
           <Route path="/redux1" element={<ReduxRanking />} />
