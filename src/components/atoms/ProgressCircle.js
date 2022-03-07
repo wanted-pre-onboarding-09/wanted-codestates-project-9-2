@@ -11,7 +11,7 @@ const ProgressCircleWrap = styled.div`
 
 const ProgressCircleContainer = styled.div`
   display: flex;
-  gap 15px;
+  gap: 15px;
   margin-bottom: 20px;
   background: #ffff;
 `;

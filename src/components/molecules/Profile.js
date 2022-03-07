@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
 import ActionButton from '../atoms/ActionButton';
+import SoloOrTeamTabBar from './SoloOrTeamTabBar';
 
 function Profile() {
   return (
@@ -17,12 +18,15 @@ function Profile() {
           USERNICKNAME
           <img src="https://tmi.nexon.com/img/icon_pro.png" alt="level" />
         </h1>
-        <TeamSelect>팀선택컴포넌트</TeamSelect>
-        <Actions>
-          <ActionButton icon="\f01e" text="전적갱신" />
-          <ActionButton icon="\f0f3" text="신고하기" />
-          <ActionButton icon="\f1e0" text="공유하기" />
-        </Actions>
+        <div className="buttonContainer">
+          <TeamSelect isUserPage />
+          <span className="divider">|</span>
+          <Actions>
+            <ActionButton icon="\f01e" text="전적갱신" />
+            <ActionButton icon="\f0f3" text="신고하기" />
+            <ActionButton icon="\f1e0" text="공유하기" />
+          </Actions>
+        </div>
       </ProfileInfo>
       <View>
         <p>
@@ -58,6 +62,15 @@ const ProfileInfo = styled.div`
     height: 25px;
     margin-left: 8px;
   }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
+  }
+  .divider {
+    margin: 0 15px;
+    color: #ececec;
+  }
 `;
 
 const StyeldImg = styled.img`
@@ -65,19 +78,7 @@ const StyeldImg = styled.img`
   height: 123px;
 `;
 
-const TeamSelect = styled.div`
-  display: inline-block;
-  &::after {
-    content: '';
-    display: inline-block;
-    margin-left: 10px;
-    top: 27px;
-    right: 0;
-    width: 1px;
-    height: 14px;
-    background-color: #ececec;
-  }
-`;
+const TeamSelect = styled(SoloOrTeamTabBar)``;
 
 const Actions = styled.div`
   display: inline-block;
