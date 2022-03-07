@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
-const RankItem = () => (
+const RankItem = ({ post }) => (
   <RankItemInfo>
     <RankNum>4</RankNum>
-    <RankNickName>1234Kcm</RankNickName>
+    <RankNickName>{post.title}</RankNickName>
     <RankPoint>
       1,429 PT
       <PlusIcon icon={faCirclePlus} />

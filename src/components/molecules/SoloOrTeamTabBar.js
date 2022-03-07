@@ -3,18 +3,26 @@ import styled from 'styled-components';
 import { faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const SoloOrTeamTabBar = () => {
+const SoloOrTeamTabBar = ({ isUserPage }) => {
   const [isSolo, setIsSolo] = useState(true);
   const handleSoloTab = () => {
     setIsSolo(!isSolo);
   };
   return (
     <ButtonTabbar>
-      <LeftTabButton isSolo={isSolo} onClick={handleSoloTab}>
+      <LeftTabButton
+        isSolo={isSolo}
+        isUserPage={isUserPage}
+        onClick={handleSoloTab}
+      >
         <FontAwesomeIcon icon={faUser} />
         개인전
       </LeftTabButton>
-      <RightTabButton isSolo={!isSolo} onClick={handleSoloTab}>
+      <RightTabButton
+        isSolo={!isSolo}
+        isUserPage={isUserPage}
+        onClick={handleSoloTab}
+      >
         <FontAwesomeIcon icon={faUsers} />
         팀전
       </RightTabButton>
@@ -38,9 +46,26 @@ const ButtonTab = styled.button`
   font-weight: 400;
   text-align: center;
   border-style: solid;
-  border-color: #fff;
-  color: ${(props) => (props.isSolo ? '#005fcc' : '#fff')};
-  background-color: ${(props) => (props.isSolo ? '#fff' : 'transparent')};
+  border-color: ${(props) => (props.isUserPage ? '#005fcc' : '#fff')};
+  color: ${(props) => {
+    switch (props.isUserPage) {
+      case true:
+        return props.isSolo ? '#fff' : '#005fcc';
+
+      default:
+        return props.isSolo ? '#005fcc' : '#fff';
+    }
+  }};
+
+  background-color: ${(props) => {
+    switch (props.isUserPage) {
+      case true:
+        return props.isSolo ? '#005fcc' : '#fff';
+
+      default:
+        return props.isSolo ? '#fff' : 'transparent';
+    }
+  }};
 `;
 
 const LeftTabButton = styled(ButtonTab)`

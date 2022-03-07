@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Search from './Search';
 
-const NavCantainer = styled.div`
-  margin: 0 auto;
-  padding: 0 auto;
+const NabCantainer = styled.div`
   height: 50%;
   width: 1000px;
   display: flex;
@@ -56,9 +54,9 @@ const Tab = styled.div`
   }
 `;
 
-function NavBar() {
+function NabBar() {
   return (
-    <NavCantainer>
+    <NabCantainer>
       <TabBox>
         <Link to="/">
           <Tab>홈</Tab>
@@ -70,8 +68,8 @@ function NavBar() {
         <Tab>트랙</Tab>
       </TabBox>
       <Search />
-    </NavCantainer>
+    </NabCantainer>
   );
 }
 
-export default NavBar;
+export default NabBar;
