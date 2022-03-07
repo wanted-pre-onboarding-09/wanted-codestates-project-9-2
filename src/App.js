@@ -6,6 +6,7 @@ import HomePage from './components/pages/HomePage';
 import RankPage from './components/pages/RankPage';
 import Header from './components/organisms/Header';
 import ReduxTest from './ReduxTest';
+import ReduxRanking from './ReduxRanking';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/rank" element={<RankPage />} />
         <Route path="/redux" element={<ReduxTest />} />
+        <Route path="/redux1" element={<ReduxRanking />} />
       </Routes>
     </BrowserRouter>
   );
