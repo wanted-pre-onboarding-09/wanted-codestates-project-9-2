@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import matchSlice from './match/matchSlice';
+import matchListSlice from './matchList/matchListSlice';
 
 const reducers = combineReducers({
   match: matchSlice,
+  matchList: matchListSlice,
 });
 
 const store = configureStore({
