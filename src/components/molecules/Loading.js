@@ -15,7 +15,7 @@ export default Loading;
 
 const StyledLoading = styled.div`
   width: 100%;
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;

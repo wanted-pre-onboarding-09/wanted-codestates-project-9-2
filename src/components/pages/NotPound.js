@@ -20,7 +20,7 @@ export default NotPound;
 
 const StyledNotFound = styled.div`
   width: 100%;
-  min-height: 100%;
+  min-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;

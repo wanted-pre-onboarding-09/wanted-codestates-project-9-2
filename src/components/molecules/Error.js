@@ -18,7 +18,7 @@ export default Error;
 
 const StyledError = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
