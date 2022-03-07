@@ -10,6 +10,7 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UserPage from './components/pages/UserPage';
 import HomePage from './components/pages/HomePage';
+import RankPage from './components/pages/RankPage';
 // import ProgressCircle from './components/atoms/ProgressCircle';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/user" element={<UserPage />} />
+        <Route path="/rank" element={<RankPage />} />
       </Routes>
     </BrowserRouter>
   );
