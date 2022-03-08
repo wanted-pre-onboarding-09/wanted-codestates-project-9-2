@@ -9,6 +9,8 @@
 
 ## 배포링크
 
+[🚀 배포 링크](https://wanted-pre-onboarding-09.github.io/wanted-codestates-project-9-2/)
+
 ## 팀원 소개
 
 |  이름  |    Role     |
