@@ -1,35 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import RankItem from '../molecules/RankItem';
 import RankItemTitle from '../molecules/RankItemTitle';
 
-const RankListContainer = () => {
+const RankListContainer = ({ handleCount, rankList }) => {
   const targetRef = useRef(null);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-  const [posts, setPosts] = useState([]);
-
-  const getPosts = useCallback(async (page) => {
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=10`,
-    );
-    setPosts((prev) => [...prev, ...response.data]);
-    setIsLoading(false);
-  }, []);
 
   const handleIntersect = useCallback((entries) => {
-    // entries배열의 첫번째 요소로 target
     const target = entries[0];
-    // target이 보이는 경우
     if (target.isIntersecting) {
-      setPage((prev) => prev + 1);
+      handleCount();
     }
   }, []);
-
-  useEffect(() => {
-    getPosts(page);
-  }, [getPosts, page]);
 
   useEffect(() => {
     const options = {
@@ -39,7 +21,6 @@ const RankListContainer = () => {
     };
     const observer = new IntersectionObserver(handleIntersect, options);
     if (targetRef.current) {
-      // 관찰할 대상을 등록
       observer.observe(targetRef.current);
     }
     return () => observer.disconnect();
@@ -50,15 +31,10 @@ const RankListContainer = () => {
       <ListContainer>
         <RankList>
           <RankItemTitle />
-          {isLoading ? (
-            <h1>로딩중</h1>
-          ) : (
-            <>
-              {posts.map((post) => (
-                <RankItem key={post.id} post={post} />
-              ))}
-            </>
-          )}
+          {rankList &&
+            Object.keys(rankList).map((key) => (
+              <RankItem key={key} data={rankList[key]} rankCount={key} />
+            ))}
           <TargetDiv ref={targetRef} />
         </RankList>
       </ListContainer>
