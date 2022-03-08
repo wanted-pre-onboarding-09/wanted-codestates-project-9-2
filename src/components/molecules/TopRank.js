@@ -215,7 +215,8 @@ const TopRankNameWrap = styled.div`
   }
 `;
 
-function TopRank() {
+function TopRank({ topRank }) {
+  console.log(topRank, 'topRank');
   /* useSelector를 통해 수신된 데이터 담기
   Progress chart 2개의 파라미터를 인자로 받는다. 
   
@@ -247,7 +248,7 @@ function TopRank() {
     }
   });
 
-  console.log(RankingData);
+  // console.log(RankingData);
 
   return (
     <TopRankWrap>
