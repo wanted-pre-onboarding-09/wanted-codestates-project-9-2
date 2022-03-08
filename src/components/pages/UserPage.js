@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import Banner from '../molecules/Banner';
 import Profile from '../molecules/Profile';
-import Comment from '../molecules/Comment';
 import UserTabBar from '../molecules/UserTabBar';
+import Comment from '../atoms/Comment';
 import RecordSideTab from '../molecules/RecordSideTab';
 import RecordList from '../molecules/RecordList';
+import RankChart from '../molecules/RankChart';
 
 const UserPage = () => {
   return (
     <Container>
       <Profile />
       <Banner />
-      <Comment />
+      <Stats>
+        <Comment />
+        <RankChart />
+      </Stats>
       <UserTabBar />
       <RecordWrapper>
         <RecordSideTab />
@@ -32,4 +36,9 @@ const Container = styled.div`
 const RecordWrapper = styled.div`
   display: flex;
   margin-top: 20px;
+`;
+
+const Stats = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

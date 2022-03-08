@@ -37,7 +37,7 @@ const CircleSubChart = styled.span`
 `;
 
 function ProgressCircle({ color, percent }) {
-    /* 
+  /* 
   ProgressCircle 컴포넌트는 부모 컴포넌트로 부터 2개의 파라미터를 인자로 받는다. 
   
    <ProgressCircle color="#07f" percent={RankingData[0].win} />
@@ -45,7 +45,7 @@ function ProgressCircle({ color, percent }) {
   변수 1 color: 도너 차트 외곽선 색깔
   변수 2 percent: 도너 차트 
   */
-  
+
   const chart1 = useRef(null); // 차트가 그려질 div 영역
   let i = 1;
 
