@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import RankItem from '../molecules/RankItem';
 import RankItemTitle from '../molecules/RankItemTitle';
 
-const RankListContainer = ({ handleCount, rankList }) => {
+const RankListContainer = ({ handleOffset, rankList }) => {
   const targetRef = useRef(null);
 
   const handleIntersect = useCallback((entries) => {
     const target = entries[0];
     if (target.isIntersecting) {
-      handleCount();
+      handleOffset();
     }
   }, []);
 
@@ -33,7 +33,7 @@ const RankListContainer = ({ handleCount, rankList }) => {
           <RankItemTitle />
           {rankList &&
             Object.keys(rankList).map((key) => (
-              <RankItem key={key} data={rankList[key]} rankCount={key} />
+              <RankItem key={key} rankData={rankList[key]} rankCount={key} />
             ))}
           <TargetDiv ref={targetRef} />
         </RankList>
