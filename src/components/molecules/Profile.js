@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ActionButton from '../atoms/ActionButton';
 import SoloOrTeamTabBar from './SoloOrTeamTabBar';
 
-function Profile() {
+function Profile({ handleMode }) {
   return (
     <Container>
       <StyeldImg
@@ -19,7 +19,7 @@ function Profile() {
           <img src="https://tmi.nexon.com/img/icon_pro.png" alt="level" />
         </h1>
         <div className="buttonContainer">
-          <TeamSelect isUserPage />
+          <TeamSelect isUserPage handleMode={handleMode} />
           <span className="divider">|</span>
           <Actions>
             <ActionButton icon="\f01e" text="전적갱신" />

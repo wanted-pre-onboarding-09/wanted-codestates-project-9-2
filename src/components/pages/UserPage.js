@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Banner from '../molecules/Banner';
@@ -10,39 +10,58 @@ import RecordList from '../molecules/RecordList';
 import RankChart from '../molecules/RankChart';
 import TotalRecord from '../molecules/TotalRecord';
 import { getMatch } from '../../store/match/matchAsyncThunk';
+import Error from '../molecules/Error';
+import Loading from '../molecules/Loading';
 
 const UserPage = () => {
+  const SOLO_HASH =
+    '7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a';
+  const TEAM_HASH =
+    'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
   const dispatch = useDispatch();
   const { error, loading, data } = useSelector((state) => state.match);
+  const [isSolo, setIsSolo] = useState(true);
 
-  console.log(error);
+  const [gameType, setGameType] = useState(SOLO_HASH);
 
-  console.log(loading);
-  console.log(data);
+  const handleMode = (mode) => {
+    setIsSolo(mode);
+  };
+
+  useEffect(() => {
+    setGameType(isSolo ? SOLO_HASH : TEAM_HASH);
+  }, [isSolo]);
+
   useEffect(() => {
     dispatch(
       getMatch({
         nickName: '헤드리강',
-        gameType:
-          '7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a',
+        gameType,
       }),
     );
-  }, []);
+  }, [gameType]);
 
   return (
     <Container>
-      <Profile />
-      <Banner />
-      <Stats>
-        <TotalRecord />
-        <Comment />
-        <RankChart />
-      </Stats>
-      <UserTabBar />
-      <RecordWrapper>
-        <RecordSideTab />
-        <RecordList />
-      </RecordWrapper>
+      {error && <Error />}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Profile handleMode={handleMode} />
+          <Banner />
+          <Stats>
+            <TotalRecord data={data} />
+            <Comment />
+            <RankChart data={data} />
+          </Stats>
+          <UserTabBar />
+          <RecordWrapper>
+            <RecordSideTab />
+            <RecordList />
+          </RecordWrapper>
+        </>
+      )}
     </Container>
   );
 };
@@ -62,4 +81,5 @@ const RecordWrapper = styled.div`
 const Stats = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
