@@ -22,6 +22,7 @@ const UserPage = () => {
     'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
   const dispatch = useDispatch();
   const params = useParams();
+  console.log(params.id);
   const { error, loading, data } = useSelector((state) => state.match);
   const { isSolo } = useSelector((state) => state.player);
 
