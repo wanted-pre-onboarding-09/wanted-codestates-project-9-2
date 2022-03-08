@@ -9,17 +9,15 @@ import {
   Tooltip,
 } from 'recharts';
 
-function RankChart() {
-  const mock = [
-    { rank: 1, battle: 1 },
-    { rank: 6, battle: 2 },
-    { rank: 8, battle: 3 },
-    { rank: 8, battle: 4 },
-    { rank: 8, battle: 5 },
-    { rank: 2, battle: 6 },
-    { rank: 5, battle: 7 },
-    { rank: 6, battle: 8 },
-  ];
+function RankChart({ data }) {
+  const recentData =
+    data &&
+    data.match.slice(0, 50).map((el, index) => {
+      return {
+        battle: index + 1,
+        rank: el.matchRank > 8 || false ? 8 : el.matchRank,
+      };
+    });
 
   const CustomTooltip = memo(({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -44,10 +42,10 @@ function RankChart() {
         </p>
       </RankInfo>
       <LineChart
-        width={500}
+        width={350}
         height={250}
-        data={mock}
-        margin={{ top: 10, right: 30, left: 0, bottom: 5 }}
+        data={recentData}
+        margin={{ top: 10, right: 0, left: 0, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="battle" tick={false} reversed />
@@ -55,7 +53,7 @@ function RankChart() {
           reversed
           dataKey="rank"
           type="number"
-          domain={[1, 8]}
+          domain={[1, 'dataMax']}
           minTickGap={1}
           interval={0}
           ticks={[1, 2, 3, 4, 5, 6, 7, 8]}
@@ -75,6 +73,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid #f2f2f2;
 
   .custom-tooltip {
     background-color: #1f334a;
@@ -97,6 +96,6 @@ const RankInfo = styled.h5`
   }
 
   span {
-    color: #005fcc;
+    color: #0077ff;
   }
 `;

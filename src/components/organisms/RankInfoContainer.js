@@ -25,7 +25,7 @@ const RankInfoContainer = ({ topRank, gameType, handleGameType }) => (
       <LineSpan>|</LineSpan>
       <ThreeTabBar />
     </Tabs>
-    <TopRank topRank={topRank} />
+    {topRank.length === 3 && <TopRank topRank={topRank} />}
   </InfoContainer>
 );
 

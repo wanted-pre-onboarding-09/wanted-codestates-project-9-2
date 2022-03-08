@@ -1,25 +1,39 @@
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { changeMode } from '../../store/player/playerSlice';
 import ActionButton from '../atoms/ActionButton';
 import SoloOrTeamTabBar from './SoloOrTeamTabBar';
 
-function Profile() {
+function Profile({ username, character, setGameType, gameType }) {
+  const dispatch = useDispatch();
+  const onSelect = () => {
+    dispatch(changeMode());
+  };
+
   return (
     <Container>
       <StyeldImg
-        src="https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/81c9f10de2f39d42f97b206c5804c32495e3f3e751d20529e1ac3c8aeb0a4939.png"
+        src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/${character}.png`}
         alt="test"
       />
 
       <ProfileInfo>
         <h1>
-          USERNICKNAME
+          {username}
           <img src="https://tmi.nexon.com/img/icon_pro.png" alt="level" />
         </h1>
         <div className="buttonContainer">
-          <TeamSelect isUserPage />
+          <span onClick={onSelect}>
+            <TeamSelect
+              isUserPage
+              setGameType={setGameType}
+              gameType={gameType}
+            />
+          </span>
+
           <span className="divider">|</span>
           <Actions>
             <ActionButton icon="\f01e" text="전적갱신" />
