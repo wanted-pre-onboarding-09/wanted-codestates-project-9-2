@@ -3,19 +3,23 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
-const RankItem = ({ post }) => (
-  <RankItemInfo>
-    <RankNum>4</RankNum>
-    <RankNickName>{post.title}</RankNickName>
-    <RankPoint>
-      1,429 PT
-      <PlusIcon icon={faCirclePlus} />
-      <ComparePoint>584</ComparePoint>
-    </RankPoint>
-    <RankCount>189회</RankCount>
-    <RankAverge>2위</RankAverge>
-  </RankItemInfo>
-);
+const RankItem = ({ data, rankCount }) => {
+  const rankNum = Number(rankCount);
+  const point = data.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return (
+    <RankItemInfo>
+      <RankNum>{rankNum + 4}</RankNum>
+      <RankNickName>{data.nickName}</RankNickName>
+      <RankPoint>
+        {point} PT
+        <PlusIcon icon={faCirclePlus} />
+        <ComparePoint>584</ComparePoint>
+      </RankPoint>
+      <RankCount>{data.playTime}회</RankCount>
+      <RankAverge>{data.rank}위</RankAverge>
+    </RankItemInfo>
+  );
+};
 
 export default RankItem;
 
