@@ -11,6 +11,15 @@
 
 [🚀 배포 링크](https://wanted-pre-onboarding-09.github.io/wanted-codestates-project-9-2/)
 
+
+## 실행 방법
+
+```
+① 해당 레포지토리를 클론한다.
+② 프로젝트의 패키지를 설치한다. (npm install)
+③ scripts 명령어로 프로젝트를 실행한다. (npm start)
+```
+
 ## 팀원 소개
 
 |  이름  |    Role     |
@@ -176,14 +185,6 @@
 ```
 
 ## 작업 내용
-
-## 실행 방법
-
-```
-① 해당 레포지토리를 클론한다.
-② 프로젝트의 패키지를 설치한다. (npm install)
-③ scripts 명령어로 프로젝트를 실행한다. (npm start)
-```
 
 
 ## 커밋 컨벤션
