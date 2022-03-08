@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Banner from '../molecules/Banner';
 import Profile from '../molecules/Profile';
-import UserTabBar from '../molecules/UserTabBar';
-import Comment from '../atoms/Comment';
+import Comment from '../molecules/Comment';
 import UserTabBar from '../molecules/UserTabBar';
 import RecordSideTab from '../molecules/RecordSideTab';
 import RecordList from '../molecules/RecordList';
@@ -22,7 +21,6 @@ const UserPage = () => {
     </Container>
   );
 };
-
 export default UserPage;
 
 const Container = styled.div`
