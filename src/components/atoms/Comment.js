@@ -56,7 +56,7 @@ const Comment = () => {
   }, []);
 
   return (
-    <ComentContainer>
+    <CommentContainer>
       <Title>
         <div>
           <span className="point">응원</span>
@@ -86,16 +86,15 @@ const Comment = () => {
         <TextInput placeholder="최대 30자" maxLength={30} ref={commentRef} />
         <SubmitBtn type="submit">남기기</SubmitBtn>
       </InputBox>
-    </ComentContainer>
+    </CommentContainer>
   );
 };
 
 export default Comment;
 
-const ComentContainer = styled.div`
-  margin: 1%;
-
+const CommentContainer = styled.div`
   border: 1px solid #f2f2f2;
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -103,7 +102,7 @@ const ComentContainer = styled.div`
   flex: 1;
 `;
 
-const Title = styled.div`
+const Title = styled.h5`
   height: 17%;
   border-bottom: 1px solid #ccc;
   font-size: 0.9rem;
@@ -159,7 +158,6 @@ const InputBox = styled.form`
   width: 90%;
   height: 13%;
   display: flex;
-
   input {
     border: 0px;
     border-bottom: 1px solid #cccccc;
@@ -169,15 +167,19 @@ const InputBox = styled.form`
 
 const NicnameInput = styled.input`
   flex: 0.8;
+  width: 15%;
   margin-left: 1%;
 `;
 const TextInput = styled.input`
+  width: 60%;
   flex: 2;
+
   margin-left: 1%;
 `;
 
 const SubmitBtn = styled.button`
   flex: 0.5;
+
   margin-left: 1%;
   border: none;
   padding: 5px;

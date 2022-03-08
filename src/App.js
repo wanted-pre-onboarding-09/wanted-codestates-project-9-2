@@ -6,8 +6,7 @@ import UserPage from './components/pages/UserPage';
 import HomePage from './components/pages/HomePage';
 import RankPage from './components/pages/RankPage';
 import Header from './components/organisms/Header';
-import ReduxTest from './ReduxTest';
-import ReduxRanking from './ReduxRanking';
+
 import NotPound from './components/pages/NotPound';
 
 function App() {
@@ -20,8 +19,6 @@ function App() {
           <Route path="*" element={<NotPound />} />
           <Route path="/user/:id" element={<UserPage />} />
           <Route path="/rank" element={<RankPage />} />
-          <Route path="/redux" element={<ReduxTest />} />
-          <Route path="/redux1" element={<ReduxRanking />} />
         </Routes>
       </StyledWrap>
     </BrowserRouter>

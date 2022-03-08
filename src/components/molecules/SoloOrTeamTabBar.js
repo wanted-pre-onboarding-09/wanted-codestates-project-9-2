@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const SoloOrTeamTabBar = ({ isUserPage }) => {
+const SoloOrTeamTabBar = ({ isUserPage, handleMode }) => {
   const [isSolo, setIsSolo] = useState(true);
   const handleSoloTab = () => {
     setIsSolo(!isSolo);
   };
+
+  useEffect(() => {
+    handleMode(isSolo);
+  }, [isSolo]);
   return (
     <ButtonTabbar>
       <LeftTabButton
