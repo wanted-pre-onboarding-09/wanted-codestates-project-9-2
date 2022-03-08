@@ -3,9 +3,9 @@ import axios from '../../service/defaultClient';
 
 export const getMatchList = createAsyncThunk(
   'user/matchList',
-  async ({ gameType, offset = 0, iimit = 20 }) => {
+  async ({ gameType, offset = 0, limit = 30 }) => {
     const allMatch = await axios.get(
-      `/matches/all?start_date=2022-03-01 00:00:00&end_date=2022-03-08 00:00:00&offset=${offset}&limit=${iimit}&match_types=${gameType}`,
+      `/matches/all?start_date=2022-03-01 00:00:00&end_date=2022-03-08 00:00:00&offset=${offset}&limit=${limit}&match_types=${gameType}`,
     );
     const rankingList = await Promise.all(
       allMatch.data.matches[0].matches.map(async (el) => {
@@ -30,9 +30,9 @@ export const getMatchList = createAsyncThunk(
 
 export const addList = createAsyncThunk(
   'user/team',
-  async ({ gameType, offset = 40, iimit = 20 }) => {
+  async ({ gameType, offset = 30, limit = 30 }) => {
     const allMatch = await axios.get(
-      `/matches/all?start_date=2022-03-01 00:00:00&end_date=2022-03-08 00:00:00&offset=${offset}&limit=${iimit}&match_types=${gameType}`,
+      `/matches/all?start_date=2022-03-01 00:00:00&end_date=2022-03-08 00:00:00&offset=${offset}&limit=${limit}&match_types=${gameType}`,
     );
 
     const rankingList = await Promise.all(

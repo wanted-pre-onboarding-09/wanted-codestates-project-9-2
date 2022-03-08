@@ -6,27 +6,32 @@ import {
   addList,
   getMatchList,
 } from '../../store/matchList/matchListAsyncThunk';
+import Loading from '../molecules/Loading';
 import RankBackground from '../molecules/RankBackground';
 import RankInfoContainer from '../organisms/RankInfoContainer';
 import RankListContainer from '../organisms/RankListContainer';
+import ErrorLoading from '../molecules/ErrorLoading';
 
 const RankPage = () => {
   const TEAM =
     'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
   const SOLO =
     '7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a';
+  const SOLOSCORE = [0, 10, 7, 5, 4, 3, 1, 0, -1, -5];
+  const TEAMSCORE = [0, 10, 8, 6, 5, 4, 3, 2, 1, 0];
 
-  const [offset, setOffset] = useState(20);
+  const [offset, setOffset] = useState(30);
   const [rankList, setRankList] = useState([]);
   const [gameType, setGameType] = useState(1);
-
+  const [score, setScore] = useState(SOLOSCORE);
   const handleGameType = (index) => {
     setGameType(index);
-    setOffset(20);
+    setScore(index === 1 ? SOLOSCORE : TEAMSCORE);
+    setOffset(30);
   };
 
   const handleOffset = () => {
-    setOffset((prev) => prev + 20);
+    setOffset((prev) => prev + 30);
   };
 
   const dispatch = useDispatch();
@@ -39,9 +44,7 @@ const RankPage = () => {
     dispatch(getMatchList({ gameType: gameType === 1 ? SOLO : TEAM, offset }));
   }, [gameType]);
 
-  const { data, loading } = useSelector((state) => state.matchList);
-
-  const ranking = [0, 10, 7, 5, 4, 3, 1, 0, -1, -5];
+  const { data, loading, error } = useSelector((state) => state.matchList);
 
   const handleData = (datas) => {
     const newData = datas.map((item) => {
@@ -55,7 +58,7 @@ const RankPage = () => {
       const avergeRanking = (totalRanking / item.playTime).toFixed(1);
       // 누적 포인트
       const points = item.ranking.reduce(
-        (prev, cur) => ranking[+cur === 99 ? 9 : +cur] + +prev,
+        (prev, cur) => score[+cur === 99 ? 9 : +cur] + +prev,
       );
       // 승률
       const winner = Math.floor((item.win / item.playTime) * 100);
@@ -81,24 +84,32 @@ const RankPage = () => {
 
   return (
     <RankWrapper>
-      <RankBackground>
-        {!loading && (
-          <RankInfoContainer
-            topRank={rankList.slice(0, 3)}
-            gameType={gameType}
-            handleGameType={handleGameType}
-          />
-        )}
-      </RankBackground>
-      {loading ? (
-        <div style={{ height: '1200px', position: 'relative', width: '100%' }}>
-          로딩중
-        </div>
+      {error ? (
+        <ErrorLoading />
       ) : (
-        <RankListContainer
-          handleOffset={handleOffset}
-          rankList={rankList.slice(3)}
-        />
+        <>
+          <RankBackground>
+            {loading ? (
+              <Loading />
+            ) : (
+              <RankInfoContainer
+                topRank={rankList.slice(0, 3)}
+                gameType={gameType}
+                handleGameType={handleGameType}
+              />
+            )}
+          </RankBackground>
+          {loading ? (
+            <LoadingWrapper>
+              <Loading />
+            </LoadingWrapper>
+          ) : (
+            <RankListContainer
+              handleOffset={handleOffset}
+              rankList={rankList.slice(3)}
+            />
+          )}
+        </>
       )}
     </RankWrapper>
   );
@@ -108,4 +119,11 @@ export default RankPage;
 
 const RankWrapper = styled.div`
   position: relative;
+`;
+
+const LoadingWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 1400px;
+  padding-top: 400px;
 `;
