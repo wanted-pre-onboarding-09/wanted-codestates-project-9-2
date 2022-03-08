@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import ScatterChart from '../atoms/ScatterChart';
 
 const RecordSideTab = () => {
   // TODO: Tab 관련 훅함수 만들기
@@ -40,7 +41,7 @@ const RecordSideTab = () => {
           <p className="map-record">
             빌리지 운명의다리<span className="grey"> 기록분포</span>
           </p>
-          <Chart />
+          <ScatterChart />
         </ChartWrapper>
       </MidWrapper>
       <TableWrapper>
@@ -184,6 +185,7 @@ const ChartWrapper = styled.div`
   .map-record {
     color: #1f334a;
     font-size: 14px;
+    margin-bottom: 10px;
   }
 
   .grey {
@@ -191,12 +193,12 @@ const ChartWrapper = styled.div`
   }
 `;
 
-const Chart = styled.div`
-  display: block;
-  height: 139px;
-  width: 278px;
-  background-color: #ebebeb;
-`;
+// const Chart = styled.div`
+//   display: block;
+//   height: 139px;
+//   width: 278px;
+//   background-color: #ebebeb;
+// `;
 
 const TableWrapper = styled.div`
   width: 328px;
