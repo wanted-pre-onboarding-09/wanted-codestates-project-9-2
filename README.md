@@ -1,11 +1,11 @@
-# wanted-codestates-project-9-9
+# wanted-codestates-project-9-2
 
 넥슨 사전 과제
 
 ## 프로젝트 소개
 
 - 카트라이더 랭킹 페이지 클론
-- 기간: 22.03.03~22.03.04
+- 기간: 22.03.07~22.03.08
 
 ## 배포링크
 
@@ -185,6 +185,18 @@
 ```
 
 ## 작업 내용
+
+## 애니메이션
+
+![main](https://user-images.githubusercontent.com/59462108/157289637-86337a18-fb76-4560-9200-4add7d70b49d.gif)
+
+![user](https://user-images.githubusercontent.com/59462108/157289994-6e5614f6-b365-4c01-a8f6-70aa7adcc989.gif)
+
+### 물결 효과
+![물결](https://user-images.githubusercontent.com/59462108/157289397-ec615047-2869-4ddc-989a-21198b51e644.gif)
+
+### Modal창 서서히 나타나는 효과 & 배찌와 다오 애니메이션
+![modal](https://user-images.githubusercontent.com/59462108/157290059-6a795d38-d3f8-4f42-9b53-78845d9fcd0c.gif)
 
 
 ## 커밋 컨벤션
