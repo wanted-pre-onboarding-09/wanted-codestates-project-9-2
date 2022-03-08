@@ -242,7 +242,7 @@ function TopRank({ topRank }) {
           <UpperTopRankWrap>
             <TopRankNameWrap>
               <div className="name">
-                <StyledLink to={`/detail/${RankingData[0].nickName}`}>
+                <StyledLink to={`/user/${RankingData[0].nickName}`}>
                   {RankingData[0].nickName}
                 </StyledLink>
               </div>
@@ -285,7 +285,7 @@ function TopRank({ topRank }) {
           <UpperTopRankWrap>
             <TopRankNameWrap>
               <div className="name">
-                <StyledLink to={`/detail/${RankingData[1].nickName}`}>
+                <StyledLink to={`/user/${RankingData[1].nickName}`}>
                   {RankingData[1].nickName}
                 </StyledLink>
               </div>
@@ -328,7 +328,7 @@ function TopRank({ topRank }) {
           <UpperTopRankWrap>
             <TopRankNameWrap>
               <div className="name">
-                <StyledLink to={`/detail/${RankingData[2].nickName}`}>
+                <StyledLink to={`/user/${RankingData[2].nickName}`}>
                   {RankingData[2].nickName}
                 </StyledLink>
               </div>
