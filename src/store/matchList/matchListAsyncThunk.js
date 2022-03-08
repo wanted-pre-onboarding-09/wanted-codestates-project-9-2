@@ -3,7 +3,7 @@ import axios from '../../service/defaultClient';
 
 export const getMatchList = createAsyncThunk(
   'user/matchList',
-  async ({ gameType, offset = 0, iimit = 50 }) => {
+  async ({ gameType, offset = 0, iimit = 200 }) => {
     const getAllMatch = await axios.get(
       `/matches/all?start_date=&end_date=&offset=${offset}&limit=${iimit}&match_types=${gameType}`,
     );
