@@ -55,7 +55,7 @@ const RankPage = () => {
       const avergeRanking = (totalRanking / item.playTime).toFixed(1);
       // 누적 포인트
       const points = item.ranking.reduce(
-        (prev, cur) => ranking[+cur === 99 ? 9 : +cur] + +prev,
+        (prev, cur) => ranking[+cur === 99 ? 9 : +cur] + +prev
       );
       // 승률
       const winner = Math.floor((item.win / item.playTime) * 100);

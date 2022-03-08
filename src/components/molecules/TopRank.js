@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { getMatchList } from '../../store/matchList/matchListAsyncThunk';
 import ProgressCircle from '../atoms/ProgressCircle';
-import mockData from '../../data/topRank.json';
+// import mockData from '../../data/topRank.json';
 import Gold from '../../assets/icon_goldmedal.png';
 import Siver from '../../assets/icon_silvermedal.png';
 import Bronz from '../../assets/icon_bronzemedal.png';
@@ -77,7 +77,7 @@ const UpperTopRankWrap = styled.div`
   }
 
   > img {
-    width: 60%;
+    width: 55%;
     position: absolute;
     top: -1rem;
     right: -2rem;
@@ -216,39 +216,22 @@ const TopRankNameWrap = styled.div`
 `;
 
 function TopRank({ topRank }) {
-  console.log(topRank, 'topRank');
-  /* useSelector를 통해 수신된 데이터 담기
-  Progress chart 2개의 파라미터를 인자로 받는다. 
-  
-   <ProgressCircle color="#07f" percent={RankingData[0].win} />
-
-  변수 1 color: 도너 차트 외곽선 색깔
-  변수 2 percent: 도너 차트 
-  */
-
   let RankingData = [];
 
-  mockData.map((obj, idx) => {
-    const winN = Math.floor(Math.random() * (100 - 70) + 70);
-    const retireN = Math.floor(Math.random() * (20 - 5) + 5);
-
-    if (idx < 3) {
-      RankingData = [
-        ...RankingData,
-        {
-          nickName: obj.nickName,
-          character: `https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/${obj.character}.png`,
-          point: obj.score
-            .toString()
-            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
-          win: winN,
-          retire: retireN,
-        },
-      ];
-    }
+  topRank.map((obj) => {
+    RankingData = [
+      ...RankingData,
+      {
+        nickName: obj.nickName,
+        character: `https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/${obj.character}.png`,
+        point: obj.points
+          .toString()
+          .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
+        win: obj.win,
+        retire: obj.Retired,
+      },
+    ];
   });
-
-  // console.log(RankingData);
 
   return (
     <TopRankWrap>
