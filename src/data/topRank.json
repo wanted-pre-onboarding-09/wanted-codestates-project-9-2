@@ -1,0 +1,32 @@
+[
+  {
+    "character": "2ecb10f5e23493727a80a91421d6242a18b131f743676e72317bde4bd5d27131",
+    "kart": "c75c77ad6eb49f84dbbd8b60c9ca1d46c9480ac2eee421c600035b276e8ea7a9",
+    "matchRetired": 0,
+    "nickName": "붕붕셰로이",
+    "playTime": 178,
+    "rank": "2",
+    "score": 1246,
+    "victory": 0
+  },
+  {
+    "character": "b6eb565e2940edbf43e4fcc42993dcdf12817f35714627ab4790853b6b2eaded",
+    "kart": "6f628bbf66d05fd09c63ffa74ee9f67cd50f1cae64c4c3158a059ed54434944d",
+    "matchRetired": 0,
+    "nickName": "BHC다오치킨",
+    "playTime": 150,
+    "rank": "1",
+    "score": 1200,
+    "victory": 7
+  },
+  {
+    "character": "2ecb10f5e23493727a80a91421d6242a18b131f743676e72317bde4bd5d27131",
+    "kart": "f7724634e3a539e6f45cbfa30eb90074081fcb2abddeff6f035d06191d784931",
+    "matchRetired": 0,
+    "nickName": "개뚱벌래",
+    "playTime": 145,
+    "rank": "1",
+    "score": 1160,
+    "victory": 7
+  }
+]
