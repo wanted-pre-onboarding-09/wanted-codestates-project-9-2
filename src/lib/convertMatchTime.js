@@ -1,4 +1,4 @@
-function convertMatchTime(matchTime) {
+const convertMatchTime = (matchTime) => {
   if (!matchTime) return '-';
 
   const time = Math.round(Number(matchTime) / 10);
@@ -10,6 +10,6 @@ function convertMatchTime(matchTime) {
   seconds = seconds < 10 ? `0${seconds}` : seconds;
 
   return `${minutes}'${seconds}'${ms}`;
-}
+};
 
 export default convertMatchTime;

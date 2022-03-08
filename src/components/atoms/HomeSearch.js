@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
 import character from '../../data/character.json';
 
 const SearchBox = styled.form`
-  border-bottom: 1px solid #ffffff;
+  margin-top: 10rem;
+  width: 720px;
+  display: row;
+  justify-content: space-around;
+  padding: 1rem;
+  border: 4px solid #ffffff;
   color: #ffffff;
-  opacity: ${({ text }) => {
-    return text ? '1' : '0.5';
-  }};
   transition: 0.5s;
-
-  :hover {
-    opacity: 1;
-  }
+  border-radius: 40px;
 
   input {
-    margin: 0.5rem;
+    width: 650px;
+    padding-left: 1rem;
     background-color: rgba(0, 0, 0, 0);
     border: none;
     color: #ffffff;
     opacity: 0.5;
+    font-size: 25px;
     :focus {
       opacity: 1;
       outline: none;
@@ -33,12 +30,10 @@ const SearchBox = styled.form`
     }
   }
 
-  svg {
-    transition: 0.5s;
-    opacity: ${({ text }) => {
-      return text.length > 2 ? '1' : '0.5';
-    }};
+  button {
+    background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
+    border: none;
   }
 `;
 
@@ -87,10 +82,10 @@ const BtnBox = styled.div`
     font-size: 16px;
   }
 `;
-const Search = () => {
+const HomeSearch = () => {
   const [text, setText] = useState('');
   const [modal, setModal] = useState(false);
-  const navigate = useNavigate();
+
   const changeText = (event) => {
     setText(event.target.value);
     console.log(text.length);
@@ -102,7 +97,7 @@ const Search = () => {
 
   const submit = (event) => {
     event.preventDefault();
-    navigate(`/test/${text}`);
+
     if (character.filter((item) => item.name === text).length === 1) {
       setModal(false);
     } else {
@@ -118,13 +113,14 @@ const Search = () => {
           type="text"
           value={text}
           onChange={changeText}
-          placeholder="닉네임 검색"
+          placeholder="카트라이더 닉네임 입력"
         />
-        <FontAwesomeIcon
-          onClick={submit}
-          text={text}
-          icon={faMagnifyingGlass}
-        />
+        <button onClick={submit} type="button">
+          <img
+            alt="Tmi"
+            src="https://tmi.nexon.com/img/assets/tmi_logo_default.svg"
+          />
+        </button>
       </SearchBox>
       <ModalBox modal={modal} onClick={modalHandler}>
         <div className="warning">
@@ -142,4 +138,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default HomeSearch;

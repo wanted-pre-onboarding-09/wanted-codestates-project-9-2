@@ -1,4 +1,4 @@
-function calculateDateDiff(time) {
+const calculateDateDiff = (time) => {
   const currentTime = new Date().getTime();
   const recordTime = new Date(time).getTime();
   const diff = currentTime - recordTime;
@@ -14,6 +14,6 @@ function calculateDateDiff(time) {
   if (hours < 24) return `${Math.floor(hours)}시간 전`;
   if (days < 7) return `${Math.floor(days)}일 전`;
   return `${Math.floor(weeks)}주 전`;
-}
+};
 
 export default calculateDateDiff;

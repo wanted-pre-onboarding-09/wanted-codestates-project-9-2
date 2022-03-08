@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getMatch } from './matchAsyncThunk';
+import { getMatch, getUniqueMatch } from './matchAsyncThunk';
 import tracks from '../../data/track.json';
 import karts from '../../data/kart.json';
 
@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   error: false,
   data: null,
+  matchInfo: null,
 };
 
 const matchSlice = createSlice({
@@ -47,6 +48,25 @@ const matchSlice = createSlice({
     builder.addCase(getMatch.rejected, (state) => {
       state.loading = false;
       state.error = true;
+    });
+    builder.addCase(getUniqueMatch.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+      state.matchInfo = null;
+    });
+    builder.addCase(getUniqueMatch.fulfilled, (state, { payload: data }) => {
+      state.loading = false;
+      state.error = null;
+      state.matchInfo = data.data;
+    });
+    builder.addCase(getUniqueMatch.rejected, (state, action) => {
+      state.loading = false;
+      state.matchInfo = null;
+      if (action.payload) {
+        state.error = action.payload;
+      } else {
+        state.error = action.error.message;
+      }
     });
   },
 });

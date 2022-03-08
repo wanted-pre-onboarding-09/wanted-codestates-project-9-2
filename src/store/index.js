@@ -1,4 +1,8 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  combineReducers,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import matchSlice from './match/matchSlice';
 import matchListSlice from './matchList/matchListSlice';
 
@@ -9,7 +13,9 @@ const reducers = combineReducers({
 
 const store = configureStore({
   reducer: reducers,
-  serializableCheck: false,
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export default store;
