@@ -12,3 +12,20 @@ export const getMatch = createAsyncThunk(
     return match.data;
   },
 );
+
+export const getUniqueMatch = createAsyncThunk(
+  'user/uinqueMatch',
+  async ({ matchId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/matches/${matchId}`);
+      console.log(response);
+      return response;
+    } catch (error) {
+      const err = error;
+      if (!err.response) {
+        throw error;
+      }
+      return rejectWithValue(err.response.data);
+    }
+  },
+);

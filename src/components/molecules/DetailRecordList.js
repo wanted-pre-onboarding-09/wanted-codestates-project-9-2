@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import DetailRecordItem from './DetailRecordItem';
 
-const DetailRecordList = ({ gameInfo }) => {
+const DetailRecordList = ({ players }) => {
   return (
     <Container>
       <List>
@@ -12,9 +12,17 @@ const DetailRecordList = ({ gameInfo }) => {
           <div className="user">유저</div>
           <div className="record">기록</div>
         </Wrapper>
-        {gameInfo.map((item) => (
-          <DetailRecordItem item={item} key={item.idx} />
-        ))}
+        {players
+          ?.slice()
+          .sort((a, b) => {
+            if (a.matchRank === '0') {
+              return b.matchRank - a.matchRank;
+            }
+            return a.matchRank - b.matchRank;
+          })
+          .map((player) => (
+            <DetailRecordItem player={player} key={player.accountNo} />
+          ))}
       </List>
     </Container>
   );

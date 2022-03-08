@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Banner from '../molecules/Banner';
@@ -20,14 +21,11 @@ const UserPage = () => {
   const TEAM_HASH =
     'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
   const dispatch = useDispatch();
+  const params = useParams();
   const { error, loading, data } = useSelector((state) => state.match);
-  const [isSolo, setIsSolo] = useState(true);
+  const { isSolo } = useSelector((state) => state.player);
 
   const [gameType, setGameType] = useState(SOLO_HASH);
-
-  const handleMode = (mode) => {
-    setIsSolo(mode);
-  };
 
   useEffect(() => {
     setGameType(isSolo ? SOLO_HASH : TEAM_HASH);
@@ -36,7 +34,7 @@ const UserPage = () => {
   useEffect(() => {
     dispatch(
       getMatch({
-        nickName: '헤드리강',
+        nickName: params.id,
         gameType,
       }),
     );
@@ -49,7 +47,7 @@ const UserPage = () => {
         <Loading />
       ) : (
         <>
-          <Profile handleMode={handleMode} />
+          <Profile username={data?.nickName} character={data?.character} />
           <Banner />
           <Stats>
             <TotalRecord data={data} />
@@ -68,7 +66,7 @@ const UserPage = () => {
       <Stats>
         <TotalRecord />
         <Comment />
-        <RankChart />
+        <RankChart data={data} />
       </Stats>
       <UserTabBar />
       <RecordWrapper>

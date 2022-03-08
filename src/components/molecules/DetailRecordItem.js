@@ -1,13 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import convertMatchTime from '../../lib/convertMatchTime';
 
-const DetailRecordItem = ({ item }) => {
+const DetailRecordItem = ({ player }) => {
   return (
     <Container>
-      <div className="rank">{item.rank}</div>
-      <div className="cart">{item.cart}</div>
-      <div className="user">{item.user}</div>
-      <div className="record">{item.record}</div>
+      <div className="rank">
+        {player.matchRank === '99' || player.matchRank === '0'
+          ? '리타이어'
+          : player.matchRank}
+      </div>
+      <div className="cart">
+        <img
+          style={{ width: '70%' }}
+          alt=""
+          src={`https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/kart/${player.kart}.png?v=1646306934`}
+          onError={(e) => {
+            e.target.src = 'https://tmi.nexon.com/img/assets/empty_kart.png';
+          }}
+        />
+      </div>
+      <div className="user">
+        <Link to={`/user/${player.characterName}`}>{player.characterName}</Link>
+      </div>
+      <div className="record">{convertMatchTime(player.matchTime)}</div>
     </Container>
   );
 };
@@ -30,6 +47,9 @@ const Container = styled.div`
   }
 
   .cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 78px;
     line-height: 78px;
   }
