@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Banner from '../molecules/Banner';
@@ -14,24 +15,25 @@ import { getMatch } from '../../store/match/matchAsyncThunk';
 
 const UserPage = () => {
   const dispatch = useDispatch();
+  const params = useParams();
   const { error, loading, data } = useSelector((state) => state.match);
 
   console.log(error);
-
+  console.log(data);
   console.log(loading);
   useEffect(() => {
     dispatch(
       getMatch({
-        nickName: '헤드리강',
+        nickName: params.id,
         gameType:
           '7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a',
       }),
     );
-  }, []);
+  }, [params]);
 
   return (
     <Container>
-      <Profile />
+      <Profile username={data?.nickName} character={data?.character} />
       <Banner />
       <Stats>
         <TotalRecord />

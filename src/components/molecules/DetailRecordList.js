@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import DetailRecordItem from './DetailRecordItem';
 
 const DetailRecordList = ({ players }) => {
-  console.log('detail record list', players);
   return (
     <Container>
       <List>
@@ -15,7 +14,12 @@ const DetailRecordList = ({ players }) => {
         </Wrapper>
         {players
           ?.slice()
-          .sort((a, b) => a.matchRank - b.matchRank)
+          .sort((a, b) => {
+            if (a.matchRank === '0') {
+              return b.matchRank - a.matchRank;
+            }
+            return a.matchRank - b.matchRank;
+          })
           .map((player) => (
             <DetailRecordItem player={player} key={player.accountNo} />
           ))}
