@@ -13,7 +13,10 @@ function RankChart({ data }) {
   const recentData =
     data &&
     data.match.slice(0, 50).map((el, index) => {
-      return { battle: index + 1, rank: el.matchRank };
+      return {
+        battle: index + 1,
+        rank: el.matchRank > 8 || false ? 8 : el.matchRank,
+      };
     });
 
   const CustomTooltip = memo(({ active, payload, label }) => {

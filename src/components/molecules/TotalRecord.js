@@ -2,27 +2,46 @@ import React from 'react';
 import styled from 'styled-components';
 import ProgressCircle from '../atoms/ProgressCircle';
 
-function TotalRecord() {
+function TotalRecord({ data }) {
+  let win;
+  let total;
+  let retire;
+  let complete;
+  let winRating;
+  let retireRating;
+  let completeRating;
+
+  if (data) {
+    win = data.match.filter((el) => el.matchWin === '1').length;
+    total = data.match.length;
+    retire = data.match.filter((el) => el.matchRetired !== '0').length;
+    complete = total - retire;
+    winRating = Math.floor((win / total) * 100, 0);
+    retireRating = Math.floor((retire / total) * 100, 0);
+    completeRating = Math.floor((complete / total) * 100, 0);
+  }
   return (
     <Container>
       <RecordTitle>
         <span>
           <span className="point">종합 </span>전적
         </span>
-        <p>###전 ##승 ##패</p>
+        <p>
+          {total}전 {win}승 {total - win}패
+        </p>
       </RecordTitle>
       <ChartContainer>
         <Chart>
-          <p>승율</p>
-          <ProgressCircle color="#07f" percent="35" />
+          <p>승률</p>
+          <ProgressCircle color="#07f" percent={winRating} />
         </Chart>
         <Chart>
           <p>완주율</p>
-          <ProgressCircle color="#9bd728" percent="35" />
+          <ProgressCircle color="#9bd728" percent={retireRating} />
         </Chart>
         <Chart>
-          <p>리타이어율</p>
-          <ProgressCircle color="#f62459" percent="35" />
+          <p>리타이어</p>
+          <ProgressCircle color="#f62459" percent={completeRating} />
         </Chart>
       </ChartContainer>
       <RecordTitle>
