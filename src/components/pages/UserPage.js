@@ -22,7 +22,6 @@ const UserPage = () => {
     'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params.id);
   const { error, loading, data } = useSelector((state) => state.match);
   const { isSolo } = useSelector((state) => state.player);
 
@@ -48,7 +47,12 @@ const UserPage = () => {
         <Loading />
       ) : (
         <>
-          <Profile username={data?.nickName} character={data?.character} />
+          <Profile
+            gameType={gameType}
+            setGameType={setGameType}
+            username={data?.nickName}
+            character={data?.character}
+          />
           <Banner />
           <Stats>
             <TotalRecord data={data} />
@@ -58,22 +62,10 @@ const UserPage = () => {
           <UserTabBar />
           <RecordWrapper>
             <RecordSideTab />
-            <RecordList />
+            <RecordList matches={data?.match} />
           </RecordWrapper>
         </>
       )}
-      <Profile />
-      <Banner />
-      <Stats>
-        <TotalRecord />
-        <Comment />
-        <RankChart data={data} />
-      </Stats>
-      <UserTabBar />
-      <RecordWrapper>
-        <RecordSideTab />
-        <RecordList matches={data?.match} />
-      </RecordWrapper>
     </Container>
   );
 };

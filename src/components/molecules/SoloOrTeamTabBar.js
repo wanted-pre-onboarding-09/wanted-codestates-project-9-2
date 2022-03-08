@@ -1,31 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const SoloOrTeamTabBar = ({ isUserPage, handleMode }) => {
+const SoloOrTeamTabBar = ({ isUserPage, setGameType }) => {
   const [isSolo, setIsSolo] = useState(true);
-  const handleSoloTab = () => {
+  // const handleSoloTab = () => {
+  // };
+  const handleSolo = () => {
     setIsSolo(!isSolo);
+    setGameType(
+      '7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a',
+    );
+  };
+  const handleParty = () => {
+    setIsSolo(!isSolo);
+    setGameType(
+      'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e',
+    );
   };
 
-  useEffect(() => {
-    handleMode(isSolo);
-  }, [isSolo]);
   return (
     <ButtonTabbar>
       <LeftTabButton
-        isSolo={isSolo}
+        // isSolo={isSolo}
         isUserPage={isUserPage}
-        onClick={handleSoloTab}
+        // onClick={handleSoloTab}
+        onClick={handleSolo}
       >
         <Icon icon={faUser} />
         개인전
       </LeftTabButton>
       <RightTabButton
-        isSolo={!isSolo}
+        // isSolo={!isSolo}
         isUserPage={isUserPage}
-        onClick={handleSoloTab}
+        // onClick={handleSoloTab}
+        onClick={handleParty}
       >
         <Icon icon={faUsers} />
         팀전
