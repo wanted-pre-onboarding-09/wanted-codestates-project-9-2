@@ -1,25 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const RankItem = ({ rankData, rankCount }) => {
   const rankNum = Number(rankCount);
   const points = rankData.points
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
   return (
-    <RankItemInfo>
-      <RankNum>{rankNum + 4}</RankNum>
-      <RankNickName>{rankData.nickName}</RankNickName>
-      <RankPoint>
-        {points} PT
-        <PlusIcon icon={faCirclePlus} />
-        <ComparePoint>584</ComparePoint>
-      </RankPoint>
-      <RankCount>{rankData.playTime}회</RankCount>
-      <RankAverge>{rankData.rank}위</RankAverge>
-    </RankItemInfo>
+    <Link to={`/user/${rankData.nickName}`}>
+      <RankItemInfo>
+        <RankNum>{rankNum + 4}</RankNum>
+        <RankNickName>{rankData.nickName}</RankNickName>
+        <RankPoint>{points} PT</RankPoint>
+        <RankCount>{rankData.playTime}회</RankCount>
+        <RankAverge>{rankData.rank}위</RankAverge>
+      </RankItemInfo>
+    </Link>
   );
 };
 
@@ -60,17 +58,6 @@ const RankPoint = styled.span`
   display: inline-block;
   width: 120px;
   font-size: 14px;
-`;
-
-const PlusIcon = styled(FontAwesomeIcon)`
-  color: #9bd728;
-  margin: 0 5px;
-`;
-
-const ComparePoint = styled.span`
-  color: #9bd728;
-  font-size: 14px;
-  font-weight: 400;
 `;
 
 const RankCount = styled.span`
