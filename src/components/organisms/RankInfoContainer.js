@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import RankGuideButton from '../atoms/RankGuideButton';
-import SoloOrTeamTabBar from '../molecules/SoloOrTeamTabBar';
+import GameTypeTab from '../molecules/GameTypeTab';
 import ThreeTabBar from '../molecules/ThreeTabBar';
 import TopRank from '../molecules/TopRank';
 
-const RankInfoContainer = ({ topRank }) => (
+const RankInfoContainer = ({ topRank, gameType, handleGameType }) => (
   <InfoContainer>
     <RankTitle>3월 TMI 랭킹</RankTitle>
     <Line />
@@ -21,7 +21,7 @@ const RankInfoContainer = ({ topRank }) => (
     </RankInfo>
     <RankGuideButton />
     <Tabs>
-      <SoloOrTeamTabBar />
+      <GameTypeTab gameType={gameType} handleGameType={handleGameType} />
       <LineSpan>|</LineSpan>
       <ThreeTabBar />
     </Tabs>
