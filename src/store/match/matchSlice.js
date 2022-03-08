@@ -35,7 +35,7 @@ const matchSlice = createSlice({
             matchRetired: el.player.matchRetired,
             trackId: tracks.find((track) => track.id === el.trackId).name,
             trackHash: el.trackId,
-            kart: karts.find((kart) => kart.id === el.player.kart).name,
+            kart: karts.find((kart) => kart.id === el.player.kart)?.name,
             kartHash: el.player.kart,
             matchTime: el.player.matchTime,
           };

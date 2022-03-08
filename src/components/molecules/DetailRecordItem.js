@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import convertMatchTime from '../../lib/convertMatchTime';
 
@@ -6,7 +7,9 @@ const DetailRecordItem = ({ player }) => {
   return (
     <Container>
       <div className="rank">
-        {player.matchRank === '99' ? '리타이어' : player.matchRank}
+        {player.matchRank === '99' || player.matchRank === '0'
+          ? '리타이어'
+          : player.matchRank}
       </div>
       <div className="cart">
         <img
@@ -18,7 +21,9 @@ const DetailRecordItem = ({ player }) => {
           }}
         />
       </div>
-      <div className="user">{player.characterName}</div>
+      <div className="user">
+        <Link to={`/user/${player.characterName}`}>{player.characterName}</Link>
+      </div>
       <div className="record">{convertMatchTime(player.matchTime)}</div>
     </Container>
   );

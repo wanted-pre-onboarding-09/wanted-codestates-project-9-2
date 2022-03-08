@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -20,18 +20,19 @@ const RecordItem = ({ match }) => {
     dispatch(getUniqueMatch({ matchId: match.matchId }));
   };
 
-  useEffect(() => {
-    console.log(matchInfo);
-  }, [matchInfo]);
-
   return (
     <ItemContainer>
       <Left rank={match.matchRank}>
         <p className="type">{calculateDateDiff(match.endTime)}</p>
         <p className="result">
-          &#35;{match.matchRank !== '' ? match.matchRank : '리타이어'}
+          &#35;
+          {match.matchRank !== '' && match.matchRank !== '99'
+            ? match.matchRank
+            : '리타이어'}
           <span className="total">
-            {match.matchRank !== '' ? `/${match.playerCnt}` : null}
+            {match.matchRank !== '' && match.matchRank !== '99'
+              ? `/${match.playerCnt}`
+              : null}
           </span>
         </p>
         <p className="track">{match.trackId}</p>
@@ -59,11 +60,19 @@ const Left = styled.div`
   justify-content: space-around;
   height: 86px;
   background: ${({ rank }) =>
-    rank === '' ? '#FBEFF2' : rank === '1' ? '#EFF3FA' : '#fff'};
+    rank === '' || rank === '99'
+      ? '#FBEFF2'
+      : rank === '1'
+      ? '#EFF3FA'
+      : '#fff'};
   border: 1px solid #ccc;
   border-left: 4px solid
     ${({ rank }) =>
-      rank === '' ? '#F52658' : rank === '1' ? '#0077FE' : '#A1A1A1'};
+      rank === '' || rank === '99'
+        ? '#F52658'
+        : rank === '1'
+        ? '#0077FE'
+        : '#A1A1A1'};
 
   p {
     height: 100%;
@@ -82,7 +91,11 @@ const Left = styled.div`
     font-size: 30px;
     font-weight: bold;
     color: ${({ rank }) =>
-      rank === '' ? '#F52658' : rank === '1' ? '#0077FE' : '#A1A1A1'};
+      rank === '' || rank === '99'
+        ? '#F52658'
+        : rank === '1'
+        ? '#0077FE'
+        : '#A1A1A1'};
   }
 
   .total {
@@ -130,11 +143,19 @@ const Left = styled.div`
     border-left: 1px solid #ccc;
     cursor: pointer;
     background: ${({ rank }) =>
-      rank === '' ? '#FBEFF2' : rank === '1' ? '#EFF3FA' : '#fff'};
+      rank === '' || rank === '99'
+        ? '#FBEFF2'
+        : rank === '1'
+        ? '#EFF3FA'
+        : '#fff'};
 
     &:hover {
       background: ${({ rank }) =>
-        rank === '' ? '#F42858' : rank === '1' ? '#0477FD' : '#A1A1A1'};
+        rank === '' || rank === '99'
+          ? '#F42858'
+          : rank === '1'
+          ? '#0477FD'
+          : '#A1A1A1'};
     }
   }
 `;
