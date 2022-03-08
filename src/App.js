@@ -6,7 +6,6 @@ import UserPage from './components/pages/UserPage';
 import HomePage from './components/pages/HomePage';
 import RankPage from './components/pages/RankPage';
 import Header from './components/organisms/Header';
-
 import NotPound from './components/pages/NotPound';
 
 function App() {

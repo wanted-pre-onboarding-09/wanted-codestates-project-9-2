@@ -16,7 +16,7 @@ export default HomeAnimation;
 
 const dao = keyframes`
   0% {
-    right: calc(0% - 315px);
+    right: 0%
 }
 100% {
   calc(25% - 315px);
@@ -25,7 +25,7 @@ const dao = keyframes`
 
 const bazzie = keyframes`
  0% {
-    left: calc(0% - 436px);
+    left: -10%
 }
 100% {
   left: calc(30% - 436px);
@@ -50,11 +50,12 @@ const BazzieImg = styled(ModalImg)`
 const DaoImg = styled(ModalImg)`
   width: 395px;
   height: 385px;
-  top: 35%;
+  top: 20%;
   background-repeat: no-repeat;
   right: calc(25% - 315px);
   background-image: url('https://tmi.nexon.com/img/assets/covid_right.png');
   animation: ${dao} 0.7s ease-out;
+  z-index: 0;
 `;
 
 const LeftArrow = styled(ModalImg)`
@@ -69,11 +70,12 @@ const LeftArrow = styled(ModalImg)`
 `;
 
 const RightArrow = styled(ModalImg)`
-  width: 527px;
+  width: 512px;
   height: 400px;
   background-repeat: no-repeat;
-  top: 35%;
+  top: 20%;
   right: calc(25% - 360px);
   background-image: url('https://tmi.nexon.com/img/main_right_bg.png');
   animation: ${dao} 0.3s ease-out;
+  z-index: 0;
 `;
