@@ -10,7 +10,7 @@ import NotPound from './components/pages/NotPound';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/wanted-codestates-project-9-2">
       <StyledWrap>
         <Header />
         <Routes>
