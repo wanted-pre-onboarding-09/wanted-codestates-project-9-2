@@ -1,7 +1,11 @@
 /* eslint-disable array-callback-return */
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getMatchList } from '../../store/matchList/matchListAsyncThunk';
 import ProgressCircle from '../atoms/ProgressCircle';
+import mockData from '../../data/topRank.json';
 import Gold from '../../assets/icon_goldmedal.png';
 import Siver from '../../assets/icon_silvermedal.png';
 import Bronz from '../../assets/icon_bronzemedal.png';
@@ -31,6 +35,31 @@ const TopRankElement = styled.div`
     left: 1rem;
   }
 `;
+
+const StyledLink = styled(Link)`
+  &:link {
+    //아직 방문하지 않은
+    color: #0077ff;
+    text-decoration: none;
+  }
+
+  &:visited {
+    //사용자가 방문한적이 있는
+    color: #0077ff;
+    text-decoration: none;
+  }
+
+  &:hover {
+    //마우스를 링크에 올려두었을 때
+    color: #0077ff;
+  }
+
+  &:active {
+    //클릭 후 뗄 떼까지
+    color: #0077ff;
+  }
+`;
+
 const UpperTopRankWrap = styled.div`
   width: 306px;
   height: 133px;
@@ -195,27 +224,30 @@ function TopRank({ topRank }) {
   변수 1 color: 도너 차트 외곽선 색깔
   변수 2 percent: 도너 차트 
   */
-  console.log(topRank, 'toprank');
-  const RankingData = [
-    {
-      character:
-        'https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/201c61527a04d85cd2de0dad75ab0878ee4125129e57aabe47b3d3ac06df8d67.png',
-      win: 80,
-      retire: 12,
-    },
-    {
-      character:
-        'https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/041195c896c373b7764e7786fab3006d897fa7326a90fce1d5299e8b78d9b672.png',
-      win: 45,
-      retire: 2,
-    },
-    {
-      character:
-        'https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/041195c896c373b7764e7786fab3006d897fa7326a90fce1d5299e8b78d9b672.png',
-      win: 78,
-      retire: 33,
-    },
-  ];
+
+  let RankingData = [];
+
+  mockData.map((obj, idx) => {
+    const winN = Math.floor(Math.random() * (100 - 70) + 70);
+    const retireN = Math.floor(Math.random() * (20 - 5) + 5);
+
+    if (idx < 3) {
+      RankingData = [
+        ...RankingData,
+        {
+          nickName: obj.nickName,
+          character: `https://s3-ap-northeast-1.amazonaws.com/solution-userstats/metadata/character/${obj.character}.png`,
+          point: obj.score
+            .toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
+          win: winN,
+          retire: retireN,
+        },
+      ];
+    }
+  });
+
+  console.log(RankingData);
 
   return (
     <TopRankWrap>
@@ -225,14 +257,18 @@ function TopRank({ topRank }) {
           <img src={Gold} alt="없음" />
           <UpperTopRankWrap>
             <TopRankNameWrap>
-              <div className="name">아이리스반달</div>
+              <div className="name">
+                <StyledLink to={`/detail/${RankingData[0].nickName}`}>
+                  {RankingData[0].nickName}
+                </StyledLink>
+              </div>
               <div className="rank">
                 <span className="text1">순위</span>
                 <span className="text2">1위</span>
               </div>
               <div className="point">
                 <span className="text1">누적포인트</span>
-                <span className="text2">1,546PT</span>
+                <span className="text2">{RankingData[0].point}PT</span>
                 <i className="fas fa-plus-circle" />
                 <span className="plusGreen">221</span>
               </div>
@@ -264,14 +300,18 @@ function TopRank({ topRank }) {
           <img src={Siver} alt="없음" />
           <UpperTopRankWrap>
             <TopRankNameWrap>
-              <div className="name">lMaCl핑마</div>
+              <div className="name">
+                <StyledLink to={`/detail/${RankingData[1].nickName}`}>
+                  {RankingData[1].nickName}
+                </StyledLink>
+              </div>
               <div className="rank">
                 <span className="text1">순위</span>
                 <span className="text2">2위</span>
               </div>
               <div className="point">
                 <span className="text1">누적포인트</span>
-                <span className="text2">1,066PT</span>
+                <span className="text2">{RankingData[1].point}PT</span>
                 <i className="fas fa-plus-circle" />
                 <span className="plusGreen">158</span>
               </div>
@@ -303,14 +343,18 @@ function TopRank({ topRank }) {
           <img src={Bronz} alt="없음" />
           <UpperTopRankWrap>
             <TopRankNameWrap>
-              <div className="name">vvvilivvv</div>
+              <div className="name">
+                <StyledLink to={`/detail/${RankingData[2].nickName}`}>
+                  {RankingData[2].nickName}
+                </StyledLink>
+              </div>
               <div className="rank">
                 <span className="text1">순위</span>
                 <span className="text2">3위</span>
               </div>
               <div className="point">
                 <span className="text1">누적포인트</span>
-                <span className="text2">911PT</span>
+                <span className="text2">{RankingData[2].point}PT</span>
                 <i className="fas fa-plus-circle" />
                 <span className="plusGreen">313</span>
               </div>
