@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
@@ -7,22 +8,21 @@ import DetailRecordList from './DetailRecordList';
 
 import calculateDateDiff from '../../lib/calculateDateDiff';
 import convertMatchTime from '../../lib/convertMatchTime';
-
-const gameInfo = [
-  { idx: 1, rank: 1, cart: '똥카', user: '무과금개꿀', record: `1'44'98` },
-  { idx: 2, rank: 2, cart: '똥카', user: '배달키키', record: `1'47'38` },
-  { idx: 3, rank: 3, cart: '똥카', user: '포항제철공업', record: `1'48'98` },
-  { idx: 4, rank: 4, cart: '똥카', user: 'BMW218d', record: `1'49'98` },
-  { idx: 5, rank: 5, cart: '똥카', user: '헤드리강', record: `1'50'98` },
-  { idx: 6, rank: '리타이어', cart: '똥카', user: 'pmj0923', record: `-` },
-  { idx: 7, rank: '리타이어', cart: '똥카', user: '핸썸만두', record: `-` },
-  { idx: 8, rank: '리타이어', cart: '똥카', user: '창모페라리', record: `-` },
-];
+import { getUniqueMatch } from '../../store/match/matchAsyncThunk';
 
 const RecordItem = ({ match }) => {
   const [more, setMore] = useState(false);
+  const dispatch = useDispatch();
+  const { matchInfo } = useSelector((state) => state.match);
 
-  const toggleMore = () => setMore((prev) => !prev);
+  const toggleMore = () => {
+    setMore((prev) => !prev);
+    dispatch(getUniqueMatch({ matchId: match.matchId }));
+  };
+
+  useEffect(() => {
+    console.log(matchInfo);
+  }, [matchInfo]);
 
   return (
     <ItemContainer>
@@ -41,7 +41,7 @@ const RecordItem = ({ match }) => {
           <FontAwesomeIcon icon={faCaretDown} />
         </button>
       </Left>
-      {more && <DetailRecordList gameInfo={gameInfo} />}
+      {more && <DetailRecordList players={matchInfo?.players} />}
     </ItemContainer>
   );
 };
