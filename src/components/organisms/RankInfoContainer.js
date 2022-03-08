@@ -5,7 +5,7 @@ import SoloOrTeamTabBar from '../molecules/SoloOrTeamTabBar';
 import ThreeTabBar from '../molecules/ThreeTabBar';
 import TopRank from '../molecules/TopRank';
 
-const RankInfoContainer = () => (
+const RankInfoContainer = ({ topRank }) => (
   <InfoContainer>
     <RankTitle>3월 TMI 랭킹</RankTitle>
     <Line />
@@ -25,7 +25,7 @@ const RankInfoContainer = () => (
       <LineSpan>|</LineSpan>
       <ThreeTabBar />
     </Tabs>
-    <TopRank />
+    <TopRank topRank={topRank} />
   </InfoContainer>
 );
 

@@ -186,7 +186,7 @@ const TopRankNameWrap = styled.div`
   }
 `;
 
-function TopRank() {
+function TopRank({ topRank }) {
   /* useSelector를 통해 수신된 데이터 담기
   Progress chart 2개의 파라미터를 인자로 받는다. 
   
@@ -195,7 +195,7 @@ function TopRank() {
   변수 1 color: 도너 차트 외곽선 색깔
   변수 2 percent: 도너 차트 
   */
-
+  console.log(topRank, 'toprank');
   const RankingData = [
     {
       character:
