@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 import Banner from '../molecules/Banner';
 import Profile from '../molecules/Profile';
 import UserTabBar from '../molecules/UserTabBar';
@@ -41,7 +42,7 @@ const UserPage = () => {
       <UserTabBar />
       <RecordWrapper>
         <RecordSideTab />
-        <RecordList />
+        <RecordList matches={data?.match} />
       </RecordWrapper>
     </Container>
   );
