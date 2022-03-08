@@ -16,6 +16,8 @@ const rankingSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getMatchList.pending, (state) => {
       state.loading = true;
+      state.error = false;
+      state.data = null;
     });
     builder.addCase(getMatchList.fulfilled, (state, { payload }) => {
       state.data = [...payload]

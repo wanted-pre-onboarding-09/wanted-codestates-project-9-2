@@ -6,12 +6,7 @@ import karts from '../../data/kart.json';
 const initialState = {
   loading: false,
   error: false,
-  data: {
-    nickName: '',
-    match: null,
-    matchType: '',
-    level: 0,
-  },
+  data: null,
 };
 
 const matchSlice = createSlice({
@@ -21,29 +16,32 @@ const matchSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getMatch.pending, (state) => {
       state.loading = true;
+      state.error = false;
+      state.data = null;
     });
     builder.addCase(getMatch.fulfilled, (state, { payload }) => {
-      state.data.nickName = payload.nickName;
-      state.data.level = payload.level;
       const character = [];
-      state.data.match = payload.matches[0].matches.map((el) => {
-        character.push(el.character);
-        return {
-          matchId: el.matchId,
-          matchRank: el.player.matchRank,
-          endTime: el.endTime,
-          playerCnt: el.playerCount,
-          matchWin: el.player.matchWin,
-          matchRetired: el.player.matchRetired,
-          trackId: tracks.find((track) => track.id === el.trackId).name,
-          trackHash: el.trackId,
-          kart: karts.find((kart) => kart.id === el.player.kart).name,
-          kartHash: el.player.kart,
-          matchTime: el.player.matchTime,
-        };
-      });
+      state.data = {
+        nickName: payload.nickName,
+        match: payload.matches[0].matches.map((el) => {
+          character.push(el.character);
+          return {
+            matchId: el.matchId,
+            matchRank: el.player.matchRank,
+            endTime: el.endTime,
+            playerCnt: el.playerCount,
+            matchWin: el.player.matchWin,
+            matchRetired: el.player.matchRetired,
+            trackId: tracks.find((track) => track.id === el.trackId).name,
+            trackHash: el.trackId,
+            kart: karts.find((kart) => kart.id === el.player.kart).name,
+            kartHash: el.player.kart,
+            matchTime: el.player.matchTime,
+          };
+        }),
+      };
       const [char] = [...new Set(character)];
-      state.data.character = char;
+      state.data = { ...state.data, character: char };
       state.loading = false;
     });
     builder.addCase(getMatch.rejected, (state) => {
@@ -52,7 +50,5 @@ const matchSlice = createSlice({
     });
   },
 });
-
-// export const { builder } = userSlice.actions;
 
 export default matchSlice.reducer;
