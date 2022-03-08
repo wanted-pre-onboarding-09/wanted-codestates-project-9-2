@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 import Banner from '../molecules/Banner';
 import Profile from '../molecules/Profile';
 import UserTabBar from '../molecules/UserTabBar';
@@ -62,6 +63,18 @@ const UserPage = () => {
           </RecordWrapper>
         </>
       )}
+      <Profile />
+      <Banner />
+      <Stats>
+        <TotalRecord />
+        <Comment />
+        <RankChart />
+      </Stats>
+      <UserTabBar />
+      <RecordWrapper>
+        <RecordSideTab />
+        <RecordList matches={data?.match} />
+      </RecordWrapper>
     </Container>
   );
 };

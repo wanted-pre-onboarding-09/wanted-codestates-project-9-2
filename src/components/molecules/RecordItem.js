@@ -5,6 +5,9 @@ import styled from 'styled-components';
 
 import DetailRecordList from './DetailRecordList';
 
+import calculateDateDiff from '../../lib/calculateDateDiff';
+import convertMatchTime from '../../lib/convertMatchTime';
+
 const gameInfo = [
   { idx: 1, rank: 1, cart: '똥카', user: '무과금개꿀', record: `1'44'98` },
   { idx: 2, rank: 2, cart: '똥카', user: '배달키키', record: `1'47'38` },
@@ -16,30 +19,24 @@ const gameInfo = [
   { idx: 8, rank: '리타이어', cart: '똥카', user: '창모페라리', record: `-` },
 ];
 
-const RecordItem = ({ item }) => {
-  const myResult = /#[1-8]/.test(item.result) && item.result.slice(0, 2);
-  const total = /#[1-8]/.test(item.result) && item.result.slice(2);
+const RecordItem = ({ match }) => {
   const [more, setMore] = useState(false);
 
   const toggleMore = () => setMore((prev) => !prev);
 
   return (
     <ItemContainer>
-      <Left rank={item.result}>
-        <p className="type">{item.type}</p>
+      <Left rank={match.matchRank}>
+        <p className="type">{calculateDateDiff(match.endTime)}</p>
         <p className="result">
-          {/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣].../.test(item.result) ? (
-            item.result
-          ) : (
-            <>
-              {myResult}
-              <span className="total">{total}</span>
-            </>
-          )}
+          &#35;{match.matchRank !== '' ? match.matchRank : '리타이어'}
+          <span className="total">
+            {match.matchRank !== '' ? `/${match.playerCnt}` : null}
+          </span>
         </p>
-        <p className="track">{item.track}</p>
-        <p className="cart">{item.cart}</p>
-        <p className="time">{item.time}</p>
+        <p className="track">{match.trackId}</p>
+        <p className="cart">{match.kart}</p>
+        <p className="time">{convertMatchTime(match.matchTime)}</p>
         <button type="button" className="open" onClick={toggleMore}>
           <FontAwesomeIcon icon={faCaretDown} />
         </button>
@@ -62,19 +59,11 @@ const Left = styled.div`
   justify-content: space-around;
   height: 86px;
   background: ${({ rank }) =>
-    /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣].../.test(rank)
-      ? '#FBEFF2'
-      : /#1/.test(rank)
-      ? '#EFF3FA'
-      : '#fff'};
+    rank === '' ? '#FBEFF2' : rank === '1' ? '#EFF3FA' : '#fff'};
   border: 1px solid #ccc;
   border-left: 4px solid
     ${({ rank }) =>
-      /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣].../.test(rank)
-        ? '#F52658'
-        : /#1/.test(rank)
-        ? '#0077FE'
-        : '#A1A1A1'};
+      rank === '' ? '#F52658' : rank === '1' ? '#0077FE' : '#A1A1A1'};
 
   p {
     height: 100%;
@@ -88,19 +77,18 @@ const Left = styled.div`
   }
 
   .result {
+    position: relative;
     width: 150px;
     font-size: 30px;
     font-weight: bold;
     color: ${({ rank }) =>
-      /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣].../.test(rank)
-        ? '#F52658'
-        : /#1/.test(rank)
-        ? '#0077FE'
-        : '#A1A1A1'};
+      rank === '' ? '#F52658' : rank === '1' ? '#0077FE' : '#A1A1A1'};
   }
 
   .total {
+    position: relative;
     font-size: 16px;
+    top: 4px;
   }
 
   .track {
@@ -142,19 +130,11 @@ const Left = styled.div`
     border-left: 1px solid #ccc;
     cursor: pointer;
     background: ${({ rank }) =>
-      /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣].../.test(rank)
-        ? '#FBEFF2'
-        : /#1/.test(rank)
-        ? '#EFF3FA'
-        : '#fff'};
+      rank === '' ? '#FBEFF2' : rank === '1' ? '#EFF3FA' : '#fff'};
 
     &:hover {
       background: ${({ rank }) =>
-        /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣].../.test(rank)
-          ? '#F42858'
-          : /#1/.test(rank)
-          ? '#0477FD'
-          : '#A1A1A1'};
+        rank === '' ? '#F42858' : rank === '1' ? '#0477FD' : '#A1A1A1'};
     }
   }
 `;

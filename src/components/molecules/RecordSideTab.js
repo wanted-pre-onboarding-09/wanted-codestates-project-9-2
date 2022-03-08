@@ -47,12 +47,14 @@ const RecordSideTab = () => {
       <TableWrapper>
         <table>
           <thead>
-            <th>선택</th>
-            <th>트랙</th>
-            <th>횟수</th>
-            <th>승률</th>
-            <th>기록</th>
-            <th>상위</th>
+            <tr>
+              <th>선택</th>
+              <th>트랙</th>
+              <th>횟수</th>
+              <th>승률</th>
+              <th>기록</th>
+              <th>상위</th>
+            </tr>
           </thead>
           {/* TODO: tbody 컨텐츠 동적 렌더 */}
           <tbody>
