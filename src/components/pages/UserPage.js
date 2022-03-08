@@ -19,7 +19,6 @@ const UserPage = () => {
   console.log(error);
 
   console.log(loading);
-  console.log(data);
   useEffect(() => {
     dispatch(
       getMatch({
