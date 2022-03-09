@@ -18,18 +18,11 @@ import Loading from '../molecules/Loading';
 const UserPage = () => {
   const SOLO_HASH =
     '7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a';
-  const TEAM_HASH =
-    'effd66758144a29868663aa50e85d3d95c5bc0147d7fdb9802691c2087f3416e';
+
   const dispatch = useDispatch();
   const params = useParams();
   const { error, loading, data } = useSelector((state) => state.match);
-  const { isSolo } = useSelector((state) => state.player);
-
   const [gameType, setGameType] = useState(SOLO_HASH);
-
-  useEffect(() => {
-    setGameType(isSolo ? SOLO_HASH : TEAM_HASH);
-  }, [isSolo]);
 
   useEffect(() => {
     dispatch(
