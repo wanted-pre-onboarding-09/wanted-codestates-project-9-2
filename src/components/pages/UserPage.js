@@ -35,10 +35,9 @@ const UserPage = () => {
 
   return (
     <Container>
+      {loading && <Loading />}
       {error && <Error />}
-      {loading ? (
-        <Loading />
-      ) : (
+      {data && (
         <>
           <Profile
             gameType={gameType}
