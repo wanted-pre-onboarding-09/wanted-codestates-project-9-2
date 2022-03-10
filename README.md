@@ -11,7 +11,6 @@
 
 [🚀 배포 링크](https://wanted-pre-onboarding-09.github.io/wanted-codestates-project-9-2/)
 
-
 ## 실행 방법
 
 ```
@@ -157,7 +156,7 @@
 │
 ├─ hooks
 │   └─ useDidMountEffect.js
-│      
+│
 │
 ├─ lib
 │   │  calculateDateDiff.js
@@ -165,8 +164,8 @@
 │
 │
 ├─ service
-│     └─ defaultClient.js  
-│    
+│     └─ defaultClient.js
+│
 └─ store
     │
     ├─ match
@@ -181,10 +180,24 @@
     │     │
     │     └─ matchListSlice.js
     │
-    └─ index.js       
+    └─ index.js
 ```
 
 ## 작업 내용
+
+## 유송현
+
+- redux
+  - 상태관리를 위해 리덕스 toolkit을 적용하였습니다.
+  - 네트워크 요청의 로딩, 에러, 데이터 상태를 가지고 있습니다.
+- 랭킹 데이터 가공
+  - 3개의 api를 조합해서 랭킹을 선정할 수 있는 데이터를 만들었습니다.
+  - api를 조합하다 보니 요청이 무거워져 요청수를 조절해 요청할수 있도록 구현해 무한스크롤 컴포넌트에서 데이터를 조금씩 요청하였습니다.
+  - 최신 게임을 진행한 유저를 무작위로 선발한 뒤 해당 유저들의 개인 전적을 조회해 데이터를 가공하였습니다.
+  - data를 받아오면 slice에서 팀원들이 최대한 편하게 사용할 수 있도록 데이터를 가공하였습니다.
+- 배포
+  - 개발 환경에서 CORS 오류를 해결하기 위해 package.json에 proxy를 지정해 주었으며, 배포 후에는 Proxy 서버를 두어 cors 에러를 해결하고 배포하였습니다.
+- 로딩 / 에러 / 404 컴포넌트 개발
 
 ## 애니메이션
 
@@ -193,11 +206,12 @@
 ![user](https://user-images.githubusercontent.com/59462108/157289994-6e5614f6-b365-4c01-a8f6-70aa7adcc989.gif)
 
 ### 물결 효과
+
 ![물결](https://user-images.githubusercontent.com/59462108/157289397-ec615047-2869-4ddc-989a-21198b51e644.gif)
 
 ### Modal창 서서히 나타나는 효과 & 배찌와 다오 애니메이션
-![modal](https://user-images.githubusercontent.com/59462108/157290059-6a795d38-d3f8-4f42-9b53-78845d9fcd0c.gif)
 
+![modal](https://user-images.githubusercontent.com/59462108/157290059-6a795d38-d3f8-4f42-9b53-78845d9fcd0c.gif)
 
 ## 커밋 컨벤션
 
