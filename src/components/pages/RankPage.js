@@ -20,14 +20,13 @@ const RankPage = () => {
   const SOLOSCORE = [0, 10, 7, 5, 4, 3, 1, 0, -1, -5];
   const TEAMSCORE = [0, 10, 8, 6, 5, 4, 3, 2, 1, 0];
 
-  const [offset, setOffset] = useState(30);
+  const [offset, setOffset] = useState(0);
   const [rankList, setRankList] = useState([]);
   const [gameType, setGameType] = useState(1);
   const [score, setScore] = useState(SOLOSCORE);
   const handleGameType = (index) => {
     setGameType(index);
     setScore(index === 1 ? SOLOSCORE : TEAMSCORE);
-    setOffset(30);
   };
 
   const handleOffset = () => {
@@ -38,10 +37,10 @@ const RankPage = () => {
 
   useDidMountEffect(() => {
     dispatch(addList({ gameType: gameType === 1 ? SOLO : TEAM, offset }));
-  }, [offset]);
+  }, [offset, gameType]);
 
   useEffect(() => {
-    dispatch(getMatchList({ gameType: gameType === 1 ? SOLO : TEAM, offset }));
+    dispatch(getMatchList({ gameType: gameType === 1 ? SOLO : TEAM }));
   }, [gameType]);
 
   const { data, loading, error } = useSelector((state) => state.matchList);
@@ -80,7 +79,7 @@ const RankPage = () => {
     if (data) {
       handleData(data);
     }
-  }, [data, offset]);
+  }, [data]);
 
   return (
     <RankWrapper>

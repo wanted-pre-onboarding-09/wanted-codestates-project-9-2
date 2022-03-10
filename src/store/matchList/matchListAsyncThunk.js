@@ -30,7 +30,7 @@ export const getMatchList = createAsyncThunk(
 
 export const addList = createAsyncThunk(
   'user/team',
-  async ({ gameType, offset = 30, limit = 30 }) => {
+  async ({ gameType, offset, limit = 30 }) => {
     const allMatch = await axios.get(
       `/matches/all?start_date=2022-03-01 00:00:00&end_date=2022-03-08 00:00:00&offset=${offset}&limit=${limit}&match_types=${gameType}`,
     );
