@@ -199,6 +199,23 @@
   - 개발 환경에서 CORS 오류를 해결하기 위해 package.json에 proxy를 지정해 주었으며, 배포 후에는 Proxy 서버를 두어 cors 에러를 해결하고 배포하였습니다.
 - 로딩 / 에러 / 404 컴포넌트 개발
 
+## 이지수
+- 상세페이지 프로필, 종합전적, 응원한마디, 순위 변동 그래프 개발
+- 응원한마디
+    - 입력한 내용을 comment state로 저장하고 comments 가 변할 때 마다 comments를 로컬스토리지에 저장했습니다.
+    - comments의 초기값은 로컬스토리지에서 가져온 값으로 설정하여 새로 로딩하면 로컬스토리지의 데이터가 화면에 보여지도록 했습니다.
+- 상세페이지 프로필의 팀전, 개인전 버튼에 따라 다른 데이터 불러오기
+    - 어려웠던 점
+        - 처음에는 팀전, 개인전을 선택하는 버튼인 `SoloOrTeamTabBar`은 다른 라우트에서도 사용하는 공용컴포넌트여서 `SoloOrTeamTabBar` 에서는 로직을 처리하지 않았습니다.
+        - `SoloOrTeamTabBar` 에서 개인전인지 아닌지 상태를 담고 있는 state 가 바뀔 때마다 상위 컴포넌트로 state 값을 전달하여 상위인 `UserPage`컴포넌트의 state를 바꾸고 state에 따라 `redux dispatch` 하는 action의 인자로 들어가는 다른 state를 바꾸도록 했습니다. (자식의 자식 컴포넌트의 state에 따라 상위 컴포넌트의 state를 바꾸고 상위의 state에 따라 다른 dispatch 함수를 실행함)
+        - dispatch 가 실행될 때까지 의존하는 state가 많아지니 버튼을 클릭해도 dispatch가 실행되지 않거나 의도와 다른 action을 전달하는 버그가 생겼습니다.
+    - 해결방법
+        - `SoloOrTeamTabBar` 를 공용 컴포넌트로 사용하지 않고 `SoloOrTeamTabBar` 안에서 로직을 처리했습니다.
+        - `SoloOrTeamTabBar` 로 dispatch 함수에 들어가는 인자 `gameType` 과 `setGameType`을 직접 전달했습니다.
+        - `SoloOrTeamTabBar` 에서는 클릭에 따라 setGameType의 값을 직접 변경시키고 gameType에 따라 버튼의 css를 변경 시키도록 함
+
+
+
 ## 애니메이션
 
 ![main](https://user-images.githubusercontent.com/59462108/157289637-86337a18-fb76-4560-9200-4add7d70b49d.gif)
