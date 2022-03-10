@@ -185,7 +185,7 @@
 
 ## 작업 내용
 
-## 유송현
+### 유송현
 
 - redux
   - 상태관리를 위해 리덕스 toolkit을 적용하였습니다.
@@ -199,7 +199,7 @@
   - 개발 환경에서 CORS 오류를 해결하기 위해 package.json에 proxy를 지정해 주었으며, 배포 후에는 Proxy 서버를 두어 cors 에러를 해결하고 배포하였습니다.
 - 로딩 / 에러 / 404 컴포넌트 개발
 
-## 이지수
+### 이지수
 - 상세페이지 프로필, 종합전적, 응원한마디, 순위 변동 그래프 개발
 - 응원한마디
     - 입력한 내용을 comment state로 저장하고 comments 가 변할 때 마다 comments를 로컬스토리지에 저장했습니다.
@@ -214,6 +214,71 @@
         - `SoloOrTeamTabBar` 로 dispatch 함수에 들어가는 인자 `gameType` 과 `setGameType`을 직접 전달했습니다.
         - `SoloOrTeamTabBar` 에서는 클릭에 따라 setGameType의 값을 직접 변경시키고 gameType에 따라 버튼의 css를 변경 시키도록 함
 
+### 손영산
+- [ ] 기록 리스트 구현
+- [ ] 매치 상세 기록 리스트 구현
+    - 기록 데이터를 `map`을 돌려 각 기록을 렌더링 시켜야 했는데, response 데이터를 가공해서 사용해야 했다.
+    - 리타이어가 '', '99'로 표현되어 있어서 해당 데이터를 리타이어 문자열로 변경해주었고
+    - 매치 날짜와 매치 기록 시간은 ms 단위였기 때문에 변경이 필요했었다.
+    - 리타이어와 일반 순위에 대한 정렬도 필요했기 때문에 일반 순위인 경우만 정렬해주었고 리타이어인 경우의 정렬은 고려하지 않았다.
+```jsx
+{players
+          ?.slice()
+          .sort((a, b) => {
+            if (a.matchRank === '0') {
+              return b.matchRank - a.matchRank;
+            }
+            return a.matchRank - b.matchRank;
+          })
+          .map((player) => (
+            <DetailRecordItem player={player} key={player.accountNo} />
+          ))}
+```
+- [ ] 매치 날짜와 매치 시간 기록 변경 함수 모듈 구현
+```js
+// 매치 날짜 변경 함수
+const calculateDateDiff = (time) => {
+  const currentTime = new Date().getTime();
+  const recordTime = new Date(time).getTime();
+  const diff = currentTime - recordTime;
+
+  const seconds = diff / 1000;
+  const minutes = seconds / 60;
+  const hours = minutes / 60;
+  const days = hours / 24;
+  const weeks = days / 7;
+
+  if (seconds < 60) return `${Math.floor(seconds)}초 전`;
+  if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+  if (hours < 24) return `${Math.floor(hours)}시간 전`;
+  if (days < 7) return `${Math.floor(days)}일 전`;
+  return `${Math.floor(weeks)}주 전`;
+};
+
+export default calculateDateDiff;
+```
+
+```js
+// 매치 기록 시간 변경 함수
+const convertMatchTime = (matchTime) => {
+  if (!matchTime) return '-';
+
+  const time = Math.round(Number(matchTime) / 10);
+  let ms = time % 100;
+  let seconds = Math.floor((time % 6000) / 100);
+  const minutes = Math.floor(time / 6000);
+
+  ms = ms < 10 ? `0${ms}` : ms;
+  seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  return `${minutes}'${seconds}'${ms}`;
+};
+
+export default convertMatchTime;
+```
+- [ ] 맵별 상세 기록 리스트 구현 (차트 데이터 적용)
+    - UI만 일부 구현
+- [ ] 카트별 상세 기록 리스트 구현
 
 
 ## 애니메이션
