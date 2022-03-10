@@ -280,20 +280,40 @@ export default convertMatchTime;
     - UI만 일부 구현
 - [ ] 카트별 상세 기록 리스트 구현
 
+### 윤솔비
+
+- 평균 순위, 누적 포인트, 승률, 리타이어율 계산
+    - 평균 순위는 총 순위를 더해 플레이 횟수로 나눠주고 소수점 둘째 자리에서 반올림해 줌 (‘99’일 경우에는 리타이어로 8을 더해줌)
+    - 누적 포인트는 사용자의 총 랭킹 데이터를 이용해 랭킹 라이드에 따라 개인전인지 팀전인지에 따라 포인트를 계산해 줌
+    - 승률은 이긴 횟수에 총 플레이 횟수를 나누고 100을 곱해줌
+    - 리타이어율은 리타이어 횟수에 총 플레이 횟수를 나누고 100을 곱해줌
+    - 계산된 데이터를 누적 포인트가 큰 순서대로 정렬해 줌
+- 랭킹 리스트 무한 스크롤 라이브러리 없이 구현
+    - `Intersection Observer`를 이용해 화면 상에 지정한 `targetRef`가 보이는지 관찰을 해줌
+    - `targetRef`가 보인다면 `offset`을 30씩 증가시켜줘 데이터를 더 받아오도록 함
+- 랭킹 가이드 모달 창
+    - 다오와 배찌 `top` 위치를 조정해 위아래로 움직이게 함
+    - `opacity` 속성값을 높여가며 Modal이 서서히 나타나게 함
+    - 이벤트 버블링을 막기 위해 `e.target`과 `e.currentTarget`이 같을 때만 Modal이 닫히도록 함
+- 물결 애니메이션 효과
+- 로딩 중일 경우 로딩 창을 보여주고 에러일 경우 에러 창을 보여줌
 
 ## 애니메이션
 
-![main](https://user-images.githubusercontent.com/59462108/157289637-86337a18-fb76-4560-9200-4add7d70b49d.gif)
+### 배찌와 다오 애니메이션 효과
+![메인](https://user-images.githubusercontent.com/59462108/157581537-d7956218-d622-4672-a0b4-2a390f993d82.gif)
 
+### 그라데이션 효과
 ![user](https://user-images.githubusercontent.com/59462108/157289994-6e5614f6-b365-4c01-a8f6-70aa7adcc989.gif)
 
 ### 물결 효과
 
 ![물결](https://user-images.githubusercontent.com/59462108/157289397-ec615047-2869-4ddc-989a-21198b51e644.gif)
 
-### Modal창 서서히 나타나는 효과 & 배찌와 다오 애니메이션
+### Modal창 서서히 나타나는 효과 & 배찌와 다오 애니메이션 효과
 
-![modal](https://user-images.githubusercontent.com/59462108/157290059-6a795d38-d3f8-4f42-9b53-78845d9fcd0c.gif)
+![모달](https://user-images.githubusercontent.com/59462108/157581593-552ed1dc-ddde-4c01-be1d-98a70ce28bbe.gif)
+
 
 ## 커밋 컨벤션
 
