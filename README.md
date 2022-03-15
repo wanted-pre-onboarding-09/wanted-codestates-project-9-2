@@ -199,6 +199,45 @@
   - 개발 환경에서 CORS 오류를 해결하기 위해 package.json에 proxy를 지정해 주었으며, 배포 후에는 Proxy 서버를 두어 cors 에러를 해결하고 배포하였습니다.
 - 로딩 / 에러 / 404 컴포넌트 개발
 
+### 서한석
+
+- progress circle chart
+    - 컴포넌트 재사용성 고려하여 기능 구현 (파일명: ProgressCircle.js)<br>
+    
+      ```jsx
+       ProgressCircle 컴포넌트는 부모 컴포넌트로 부터 2개의 파라미터를 인자로 받는다. 
+       인자 1 color: 도너 차트 외곽선 색깔
+       인자 2 percent: 도너 차트 
+      ```
+      ```jsx
+       <ProgressCircle color="#07f" percent={RankingData[1].win} />
+      ```
+      <br>
+ <p align="center"><img src="https://user-images.githubusercontent.com/87353284/158306214-c1dca079-44da-405b-bb0c-f11fe8c11876.gif" width="70%"></p>
+ <br>
+
+- Top Ranker 영역 마크업과 스타일링 (파일명: TopRank.js)
+    - DB에서 수신한 Ranker 정보와 연동하여 Top Ranker 데이터 랜더링<br>
+    - 성능 고려하여 map 순회 인덱스 0 ~ 2까지만 실행하여 데이터 특정
+      ```jsx
+        topRank.map((obj, idx) => {
+         if (idx < 3) {
+          RankingData = [
+            ...RankingData,
+            {
+              nickName: obj.nickName,
+              character: `{API생략}.png`,
+              point: obj.points
+                .toString()
+                .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
+              win: obj.win,
+              retire: obj.Retired,
+            },
+          ];
+        }
+      ```
+      <p align="center"><img src="https://user-images.githubusercontent.com/87353284/158309283-b80ce448-490a-4262-9693-1987f059714e.png" width="70%"></p>
+
 ### 이지수
 - 상세페이지 프로필, 종합 전적, 응원한마디, 순위 변동 그래프 개발
 - 응원한마디
