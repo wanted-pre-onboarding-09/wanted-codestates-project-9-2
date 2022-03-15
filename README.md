@@ -213,7 +213,7 @@
        <ProgressCircle color="#07f" percent={RankingData[1].win} />
       ```
       <br>
- <p align="center"><img src="https://user-images.githubusercontent.com/87353284/158306214-c1dca079-44da-405b-bb0c-f11fe8c11876.gif" width="70%"></p>
+      <img src="https://user-images.githubusercontent.com/87353284/158306214-c1dca079-44da-405b-bb0c-f11fe8c11876.gif" width=90%">
  <br>
 
 - Top Ranker 영역 마크업과 스타일링 (파일명: TopRank.js)
@@ -236,7 +236,7 @@
           ];
         }
       ```
-      <p align="center"><img src="https://user-images.githubusercontent.com/87353284/158315125-db4cf4bb-7de1-48fe-ab7d-26d680d2be09.png" width="70%"></p>
+      <img src="https://user-images.githubusercontent.com/87353284/158315125-db4cf4bb-7de1-48fe-ab7d-26d680d2be09.png" width="80%">
 
 
 ### 이지수
