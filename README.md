@@ -236,7 +236,8 @@
           ];
         }
       ```
-      <p align="center"><img src="https://user-images.githubusercontent.com/87353284/158309283-b80ce448-490a-4262-9693-1987f059714e.png" width="70%"></p>
+      <p align="center"><img src="https://user-images.githubusercontent.com/87353284/158315125-db4cf4bb-7de1-48fe-ab7d-26d680d2be09.png" width="70%"></p>
+
 
 ### 이지수
 - 상세페이지 프로필, 종합 전적, 응원한마디, 순위 변동 그래프 개발
