@@ -218,15 +218,13 @@
 
 - Top Ranker 영역 마크업과 스타일링 (파일명: TopRank.js)
     - DB에서 수신한 Ranker 정보와 연동하여 Top Ranker 데이터 랜더링<br>
-    - 성능 고려하여 map 순회 인덱스 0 ~ 2까지만 실행하여 데이터 특정
       ```jsx
-        topRank.map((obj, idx) => {
-         if (idx < 3) {
+        topRank.map((obj) => {
           RankingData = [
             ...RankingData,
             {
               nickName: obj.nickName,
-              character: `{API생략}.png`,
+              character: `{API생략}/${obj.character}.png`,
               point: obj.points
                 .toString()
                 .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
@@ -234,7 +232,7 @@
               retire: obj.Retired,
             },
           ];
-        }
+        });
       ```
       <img src="https://user-images.githubusercontent.com/87353284/158315125-db4cf4bb-7de1-48fe-ab7d-26d680d2be09.png" width="80%">
 
